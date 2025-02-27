@@ -1,0 +1,22 @@
+{
+	"type": "app",
+	"version": "2.0.0",
+	"name": "Serve YOLO",
+	"description": "Deploy YOLO models as a REST API service",
+	"entrypoint": "python3 -m uvicorn main:model.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/serve",
+	"port": 8000,
+	"categories": ["neural network", "images", "object detection", "serve", "framework:YOLO"],
+	"icon": "",
+	"icon_cover": true,
+	"poster": "",
+	"need_gpu": false,
+	"gpu": "preferred",
+	"session_tags": ["deployed_nn"],
+	"community_agent": false,
+	"docker_image": "supervisely/yolo:1.0.0",
+	"task_location": "application_sessions",
+	"license": {
+		"type": "Apache-2.0"
+	},
+	"instance_version": "6.12.29"
+}
