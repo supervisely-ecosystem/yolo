@@ -6,15 +6,14 @@ from ultralytics.utils import SettingsManager
 
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource, TaskType
-from supervisely.nn.training.loggers import train_logger
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
+from supervisely_integration.train.trainer import Trainer  # Import the Trainer class
 
-# @TODO:
-# add segm and pose
-# [low] export onnxruntime lib
-# [low] check yolo convert for each task type
-
+# TODOs
+# - Add support for segmentation and pose estimation
+# - [Low priority] Export ONNX runtime library
+# - [Low priority] Check YOLO conversion for each task type
 
 sly_yolo_task_map = {
     TaskType.OBJECT_DETECTION: "detect",
@@ -31,46 +30,19 @@ train = TrainApp(
 )
 
 train.register_inference_class(YOLOModel)
-
 train.gui.load_from_app_state("supervisely_integration/train/app_state.json")
 
 
 @train.start
 def start_training():
+    """Start the training process with a clean, high-level workflow."""
     data_config_path = convert_data()
     train_config = prepare_train_config(data_config_path)
 
     log_dir = join(getcwd(), train_config["project"], train_config["name"])
     train.start_tensorboard(log_dir)
-    model = YOLO(train_config["model"])
-
-    # Define Ultralytics callbacks to integrate with BaseTrainLogger
-    def on_train_start(trainer):
-        train_logger.train_started(total_epochs=trainer.epochs)
-
-    def on_train_epoch_start(trainer):
-        # Total steps per epoch = number of batches
-        total_steps = len(trainer.train_loader)
-        train_logger.epoch_started(total_steps=total_steps)
-
-    def on_train_batch_end(trainer):
-        train_logger.step_finished()
-
-    def on_train_epoch_end(trainer):
-        train_logger.epoch_finished()
-
-    def on_train_end(trainer):
-        train_logger.train_finished()
-
-    # Register callbacks with the model
-    model.add_callback("on_train_start", on_train_start)
-    model.add_callback("on_train_epoch_start", on_train_epoch_start)
-    model.add_callback("on_train_batch_end", on_train_batch_end)
-    model.add_callback("on_train_epoch_end", on_train_epoch_end)
-    model.add_callback("on_train_end", on_train_end)
-
-    # Start training
-    model.train(**train_config)
+    trainer = Trainer(train_config)
+    trainer.train()
 
     output_checkpoint_dir = join(getcwd(), train_config["project"], train_config["name"], "weights")
     experiment_info = {
@@ -84,25 +56,28 @@ def start_training():
 
 @train.export_onnx
 def to_onnx(experiment_info: dict):
-    return export_checkpoint(
-        experiment_info["best_checkpoint"], format="engine", fp16=False, dynamic=False
-    )
-
-
-@train.export_tensorrt
-def to_tensorrt(experiment_info: dict):
+    """Export the model to ONNX format."""
     return export_checkpoint(
         experiment_info["best_checkpoint"], format="onnx", fp16=False, dynamic=False
     )
 
 
+@train.export_tensorrt
+def to_tensorrt(experiment_info: dict):
+    """Export the model to TensorRT format."""
+    return export_checkpoint(
+        experiment_info["best_checkpoint"], format="engine", fp16=False, dynamic=False
+    )
+
+
 def convert_data():
+    """Convert Supervisely project data to YOLO format."""
     project = train.sly_project
     yolo_project_path = join(getcwd(), train.work_dir, "yolo_project")
     project.to_yolo(yolo_project_path, train.task_type, val_datasets=["val"])
     data_config_path = join(yolo_project_path, "data_config.yaml")
 
-    # Update YOLO Settings
+    # Update YOLO settings
     weights_dir = join(getcwd(), train.model_dir)
     runs_dir = join(getcwd(), train.output_dir, "runs")
     datasets_dir = yolo_project_path
@@ -112,6 +87,7 @@ def convert_data():
 
 
 def prepare_train_config(data_config_path):
+    """Prepare the training configuration dictionary."""
     if train.model_source == ModelSource.PRETRAINED:
         checkpoint_path = join(
             getcwd(), train.model_dir, get_file_name(train.model_files["checkpoint"])
@@ -138,6 +114,7 @@ def prepare_train_config(data_config_path):
 
 
 def export_checkpoint(checkpoint_path: str, format: str, fp16=False, dynamic=False):
+    """Export a checkpoint to the specified format."""
     exported_checkpoint_path = checkpoint_path.replace(".pt", f".{format}")
     if fp16:
         exported_checkpoint_path = exported_checkpoint_path.replace(f".{format}", f"_fp16.{format}")
