@@ -6,10 +6,9 @@ from ultralytics.utils import SettingsManager
 
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource, TaskType
+from supervisely.nn.training.loggers import train_logger
 from supervisely.nn.training.train_app import TrainApp
-
-# from supervisely_integration.serve.serve_yolo import YOLOServe
-
+from supervisely_integration.serve.serve_yolo import YOLOModel
 
 # @TODO:
 # add segm and pose
@@ -31,7 +30,7 @@ train = TrainApp(
     f"{base_path}/app_options.yaml",
 )
 
-# train.register_inference_class(YOLOServe)
+train.register_inference_class(YOLOModel)
 
 train.gui.load_from_app_state("supervisely_integration/train/app_state.json")
 
@@ -44,6 +43,33 @@ def start_training():
     log_dir = join(getcwd(), train_config["project"], train_config["name"])
     train.start_tensorboard(log_dir)
     model = YOLO(train_config["model"])
+
+    # Define Ultralytics callbacks to integrate with BaseTrainLogger
+    def on_train_start(trainer):
+        train_logger.train_started(total_epochs=trainer.epochs)
+
+    def on_train_epoch_start(trainer):
+        # Total steps per epoch = number of batches
+        total_steps = len(trainer.train_loader)
+        train_logger.epoch_started(total_steps=total_steps)
+
+    def on_train_batch_end(trainer):
+        train_logger.step_finished()
+
+    def on_train_epoch_end(trainer):
+        train_logger.epoch_finished()
+
+    def on_train_end(trainer):
+        train_logger.train_finished()
+
+    # Register callbacks with the model
+    model.add_callback("on_train_start", on_train_start)
+    model.add_callback("on_train_epoch_start", on_train_epoch_start)
+    model.add_callback("on_train_batch_end", on_train_batch_end)
+    model.add_callback("on_train_epoch_end", on_train_epoch_end)
+    model.add_callback("on_train_end", on_train_end)
+
+    # Start training
     model.train(**train_config)
 
     output_checkpoint_dir = join(getcwd(), train_config["project"], train_config["name"], "weights")

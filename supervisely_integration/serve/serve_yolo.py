@@ -8,7 +8,6 @@ import numpy as np
 import torch
 import torchvision.transforms as T
 import yaml
-from keypoints_template import dict_to_template, human_template
 from PIL import Image
 from ultralytics import YOLO
 
@@ -24,6 +23,10 @@ from supervisely.nn.prediction_dto import (
     PredictionBBox,
     PredictionKeypoints,
     PredictionMask,
+)
+from supervisely_integration.serve.keypoints_template import (
+    dict_to_template,
+    human_template,
 )
 
 SERVE_PATH = "supervisely_integration/serve"
