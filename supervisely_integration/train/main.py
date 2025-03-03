@@ -8,12 +8,7 @@ from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource, TaskType
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
-from supervisely_integration.train.trainer import Trainer  # Import the Trainer class
-
-# TODOs
-# - Add support for segmentation and pose estimation
-# - [Low priority] Export ONNX runtime library
-# - [Low priority] Check YOLO conversion for each task type
+from supervisely_integration.train.trainer import Trainer
 
 sly_yolo_task_map = {
     TaskType.OBJECT_DETECTION: "detect",
@@ -30,7 +25,7 @@ train = TrainApp(
 )
 
 train.register_inference_class(YOLOModel)
-train.gui.load_from_app_state("supervisely_integration/train/app_state.json")
+# train.gui.load_from_app_state("supervisely_integration/train/app_state.json")
 
 
 @train.start

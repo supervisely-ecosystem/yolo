@@ -1,8 +1,11 @@
-git+https://github.com/supervisely/supervisely.git@update-train-app-yolo
+# git+https://github.com/supervisely/supervisely.git@update-train-app-yolo
 
-# supervisely[tracking,model-benchmark]==6.73.317
-torch
-torchvision
-ultralytics
-tensorboard
-tensorboardx
+# supervisely[tracking,model-benchmark]==6.73.319
+torch==2.6.0
+torchvision==0.21.0
+ultralytics==8.3.80
+tensorboard==2.19.0
+tensorboardx==2.6.2.2
+tensorrt==10.8.0.43
+onnx==1.17.0
+onnxruntime-gpu==1.20.1

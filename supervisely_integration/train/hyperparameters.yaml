@@ -7,9 +7,9 @@ patience: 50 # (int) epochs to wait for no observable improvement for early stop
 batch: 16 # (int) number of images per batch (-1 for AutoBatch)
 imgsz: 640 # (int | list) input images size as int for train and val modes, or list[h,w] for predict and export modes
 save: True # (bool) save train checkpoints and predict results
-save_period: -1 # (int) Save checkpoint every x epochs (disabled if < 1)
+save_period: 10 # (int) Save checkpoint every x epochs (disabled if < 1)
 workers: 8 # (int) number of worker threads for data loading (per RANK if DDP)
-optimizer: auto # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
+optimizer: AdamW # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
 verbose: False # (bool) whether to print verbose output
 seed: 0 # (int) random seed for reproducibility
 cos_lr: False # (bool) use cosine learning rate scheduler
@@ -43,7 +43,7 @@ perspective: 0.0 # (float) image perspective (+/- fraction), range 0-0.001
 flipud: 0.0 # (float) image flip up-down (probability)
 fliplr: 0.5 # (float) image flip left-right (probability)
 bgr: 0.0 # (float) image channel BGR (probability)
-mosaic: 1.0 # (float) image mosaic (probability)
+mosaic: 0.0 # (float) image mosaic (probability)
 mixup: 0.0 # (float) image mixup (probability)
 copy_paste: 0.0 # (float) segment copy-paste (probability)
 copy_paste_mode: "flip" # (str) the method to do copy_paste augmentation (flip, mixup)

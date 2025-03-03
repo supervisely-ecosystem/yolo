@@ -9,3 +9,4 @@ app_data/
 **/__pycache__/
 benchmark/
 train/app_state.json
+models.json
