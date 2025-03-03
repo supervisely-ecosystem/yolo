@@ -1,1 +1,6 @@
-confidence_threshold: 0.4
+conf: 0.25 # (float) # bounding box confidence threshold
+iou: 0.7 # (float) intersection over union (IoU) threshold for NMS (no effect for YOLOv10 models)
+half: False # (bool) use half precision (FP16)
+max_det: 300 # (int) maximum number of detections per image
+agnostic_nms: False # (bool) whether to use class-agnostic NMS or not
+point_threshold: 0.1 # (float) point confidence threshold (for pose estimation)

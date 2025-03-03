@@ -1,5 +1,418 @@
 [
     {
+        "Model": "YOLO12n",
+        "Size (pixels)": "640",
+        "mAP": "40.6",
+        "params (M)": "2.6",
+        "FLOPs (B)": "6.5",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo12n",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12n.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO12s",
+        "Size (pixels)": "640",
+        "mAP": "48.0",
+        "params (M)": "9.3",
+        "FLOPs (B)": "21.4",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo12s",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12s.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO12m",
+        "Size (pixels)": "640",
+        "mAP": "52.5",
+        "params (M)": "20.2",
+        "FLOPs (B)": "67.5",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo12m",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12m.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO12l",
+        "Size (pixels)": "640",
+        "mAP": "53.7",
+        "params (M)": "26.4",
+        "FLOPs (B)": "88.9",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo12s",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12l.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO12x",
+        "Size (pixels)": "640",
+        "mAP": "55.2",
+        "params (M)": "59.1",
+        "FLOPs (B)": "199.0",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo12x",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12x.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11n-det",
+        "Size (pixels)": "640",
+        "mAP": "39.5",
+        "params (M)": "2.6",
+        "FLOPs (B)": "6.5",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo11n",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11s-det",
+        "Size (pixels)": "640",
+        "mAP": "47.0",
+        "params (M)": "9.4",
+        "FLOPs (B)": "21.5",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo11s",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11m-det",
+        "Size (pixels)": "640",
+        "mAP": "51.5",
+        "params (M)": "20.1",
+        "FLOPs (B)": "68.0",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo11m",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11l-det",
+        "Size (pixels)": "640",
+        "mAP": "53.4",
+        "params (M)": "25.3",
+        "FLOPs (B)": "86.9",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo11l",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11x-det",
+        "Size (pixels)": "640",
+        "mAP": "54.7",
+        "params (M)": "56.9",
+        "FLOPs (B)": "194.9",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolo11x",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11n-pose",
+        "Size (pixels)": "640",
+        "mAP": "50.0",
+        "params (M)": "2.9",
+        "FLOPs (B)": "7.6",
+        "meta": {
+            "task_type": "pose estimation",
+            "model_name": "yolo11n-pose",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-pose.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11s-pose",
+        "Size (pixels)": "640",
+        "mAP": "58.9",
+        "params (M)": "9.9",
+        "FLOPs (B)": "23.2",
+        "meta": {
+            "task_type": "pose estimation",
+            "model_name": "yolo11s-pose",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-pose.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11m-pose",
+        "Size (pixels)": "640",
+        "mAP": "64.9",
+        "params (M)": "20.9",
+        "FLOPs (B)": "71.7",
+        "meta": {
+            "task_type": "pose estimation",
+            "model_name": "yolo11m-pose",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-pose.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11l-pose",
+        "Size (pixels)": "640",
+        "mAP": "66.1",
+        "params (M)": "26.2",
+        "FLOPs (B)": "90.7",
+        "meta": {
+            "task_type": "pose estimation",
+            "model_name": "yolo11l-pose",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l-pose.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11x-pose",
+        "Size (pixels)": "640",
+        "mAP": "69.5",
+        "params (M)": "58.8",
+        "FLOPs (B)": "203.3",
+        "meta": {
+            "task_type": "pose estimation",
+            "model_name": "yolo11x-pose",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x-pose.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11n-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "38.9",
+        "mAP (mask)": "32.0",
+        "params (M)": "2.9",
+        "FLOPs (B)": "10.4",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolo11n-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11s-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "46.6",
+        "mAP (mask)": "37.8",
+        "params (M)": "10.1",
+        "FLOPs (B)": "35.5",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolo11s-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11m-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "51.5",
+        "mAP (mask)": "41.5",
+        "params (M)": "22.4",
+        "FLOPs (B)": "123.3",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolo11m-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11l-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "53.4",
+        "mAP (mask)": "42.9",
+        "params (M)": "27.6",
+        "FLOPs (B)": "142.2",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolo11l-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLO11x-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "54.7",
+        "mAP (mask)": "43.8",
+        "params (M)": "62.1",
+        "FLOPs (B)": "319.0",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolo11x-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv10n-det",
+        "Size (pixels)": "640",
+        "mAP": "39.5",
+        "params (M)": "2.3",
+        "FLOPs (B)": "6.7",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov10n",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10n.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv10s-det",
+        "Size (pixels)": "640",
+        "mAP": "46.8",
+        "params (M)": "7.2",
+        "FLOPs (B)": "21.6",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov10s",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10s.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv10m-det",
+        "Size (pixels)": "640",
+        "mAP": "51.3",
+        "params (M)": "15.4",
+        "FLOPs (B)": "59.1",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov10m",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10m.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv10l-det",
+        "Size (pixels)": "640",
+        "mAP": "53.4",
+        "params (M)": "24.4",
+        "FLOPs (B)": "120.3",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov10l",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10l.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv10x-det",
+        "Size (pixels)": "640",
+        "mAP": "54.4",
+        "params (M)": "29.5",
+        "FLOPs (B)": "160.4",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov10x",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10x.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv9c-det",
+        "Size (pixels)": "640",
+        "mAP": "53.0",
+        "params (M)": "25.5",
+        "FLOPs (B)": "102.8",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov9c",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9c.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv9e-det",
+        "Size (pixels)": "640",
+        "mAP": "55.6",
+        "params (M)": "58.1",
+        "FLOPs (B)": "192.5",
+        "meta": {
+            "task_type": "object detection",
+            "model_name": "yolov9e",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9e.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv9c-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "52.4",
+        "mAP (mask)": "42.2",
+        "params (M)": "27.9",
+        "FLOPs (B)": "159.4",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolov9c-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9c-seg.pt"
+            }
+        }
+    },
+    {
+        "Model": "YOLOv9e-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "55.1",
+        "mAP (mask)": "44.3",
+        "params (M)": "60.5",
+        "FLOPs (B)": "248.4",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_name": "yolov9e-seg",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9e-seg.pt"
+            }
+        }
+    },
+    {
         "Model": "YOLOv8n-det (COCO)",
         "Size (pixels)": "640",
         "mAP": "37.3",
@@ -299,345 +712,142 @@
         }
     },
     {
-        "Model": "YOLOv9c-det",
+        "Model": "YOLOv5nu",
         "Size (pixels)": "640",
-        "mAP": "53.0",
-        "params (M)": "25.5",
-        "FLOPs (B)": "102.8",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov9c",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9c.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv9e-det",
-        "Size (pixels)": "640",
-        "mAP": "55.6",
-        "params (M)": "58.1",
-        "FLOPs (B)": "192.5",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov9e",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9e.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv9c-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "52.4",
-        "mAP (mask)": "42.2",
-        "params (M)": "27.9",
-        "FLOPs (B)": "159.4",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolov9c-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9c-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv9e-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "55.1",
-        "mAP (mask)": "44.3",
-        "params (M)": "60.5",
-        "FLOPs (B)": "248.4",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolov9e-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov9e-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv10n-det",
-        "Size (pixels)": "640",
-        "mAP": "39.5",
-        "params (M)": "2.3",
-        "FLOPs (B)": "6.7",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov10n",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10n.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv10s-det",
-        "Size (pixels)": "640",
-        "mAP": "46.8",
-        "params (M)": "7.2",
-        "FLOPs (B)": "21.6",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov10s",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10s.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv10m-det",
-        "Size (pixels)": "640",
-        "mAP": "51.3",
-        "params (M)": "15.4",
-        "FLOPs (B)": "59.1",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov10m",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10m.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv10l-det",
-        "Size (pixels)": "640",
-        "mAP": "53.4",
-        "params (M)": "24.4",
-        "FLOPs (B)": "120.3",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov10l",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10l.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLOv10x-det",
-        "Size (pixels)": "640",
-        "mAP": "54.4",
-        "params (M)": "29.5",
-        "FLOPs (B)": "160.4",
-        "meta": {
-            "task_type": "object detection",
-            "model_name": "yolov10x",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov10x.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11n-det",
-        "Size (pixels)": "640",
-        "mAP": "39.5",
+        "mAP": "34.3",
         "params (M)": "2.6",
-        "FLOPs (B)": "6.5",
+        "FLOPs (B)": "7.7",
         "meta": {
             "task_type": "object detection",
-            "model_name": "yolo11n",
+            "model_name": "yolov5nu",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5nu.pt"
             }
         }
     },
     {
-        "Model": "YOLO11s-det",
+        "Model": "YOLOv5su",
         "Size (pixels)": "640",
-        "mAP": "47.0",
-        "params (M)": "9.4",
-        "FLOPs (B)": "21.5",
+        "mAP": "43.0",
+        "params (M)": "9.1",
+        "FLOPs (B)": "24.0",
         "meta": {
             "task_type": "object detection",
-            "model_name": "yolo11s",
+            "model_name": "yolov5su",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5su.pt"
             }
         }
     },
     {
-        "Model": "YOLO11m-det",
+        "Model": "YOLOv5mu",
         "Size (pixels)": "640",
-        "mAP": "51.5",
-        "params (M)": "20.1",
-        "FLOPs (B)": "68.0",
+        "mAP": "59.0",
+        "params (M)": "25.1",
+        "FLOPs (B)": "64.2",
         "meta": {
             "task_type": "object detection",
-            "model_name": "yolo11m",
+            "model_name": "yolov5mu",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5mu.pt"
             }
         }
     },
     {
-        "Model": "YOLO11l-det",
+        "Model": "YOLOv5lu",
         "Size (pixels)": "640",
-        "mAP": "53.4",
-        "params (M)": "25.3",
-        "FLOPs (B)": "86.9",
+        "mAP": "52.2",
+        "params (M)": "43.2",
+        "FLOPs (B)": "135.0",
         "meta": {
             "task_type": "object detection",
-            "model_name": "yolo11l",
+            "model_name": "yolov5lu",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5lu.pt"
             }
         }
     },
     {
-        "Model": "YOLO11x-det",
+        "Model": "YOLOv5xu",
         "Size (pixels)": "640",
-        "mAP": "54.7",
-        "params (M)": "56.9",
-        "FLOPs (B)": "194.9",
+        "mAP": "53.2",
+        "params (M)": "97.2",
+        "FLOPs (B)": "246.4",
         "meta": {
             "task_type": "object detection",
-            "model_name": "yolo11x",
+            "model_name": "yolov5xu",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5xu.pt"
             }
         }
     },
     {
-        "Model": "YOLO11n-pose",
-        "Size (pixels)": "640",
-        "mAP": "50.0",
-        "params (M)": "2.9",
-        "FLOPs (B)": "7.6",
+        "Model": "YOLOv5n6u",
+        "Size (pixels)": "1280",
+        "mAP": "42.1",
+        "params (M)": "4.3",
+        "FLOPs (B)": "7.8",
         "meta": {
-            "task_type": "pose estimation",
-            "model_name": "yolo11n-pose",
+            "task_type": "object detection",
+            "model_name": "yolov5n6u",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-pose.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5n6u.pt"
             }
         }
     },
     {
-        "Model": "YOLO11s-pose",
-        "Size (pixels)": "640",
-        "mAP": "58.9",
-        "params (M)": "9.9",
-        "FLOPs (B)": "23.2",
+        "Model": "YOLOv5s6u",
+        "Size (pixels)": "1280",
+        "mAP": "48.6",
+        "params (M)": "15.3",
+        "FLOPs (B)": "24.6",
         "meta": {
-            "task_type": "pose estimation",
-            "model_name": "yolo11s-pose",
+            "task_type": "object detection",
+            "model_name": "yolov5s6u",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-pose.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5s6u.pt"
             }
         }
     },
     {
-        "Model": "YOLO11m-pose",
-        "Size (pixels)": "640",
-        "mAP": "64.9",
-        "params (M)": "20.9",
-        "FLOPs (B)": "71.7",
+        "Model": "YOLOv5m6u",
+        "Size (pixels)": "1280",
+        "mAP": "53.6",
+        "params (M)": "41.2",
+        "FLOPs (B)": "65.7",
         "meta": {
-            "task_type": "pose estimation",
-            "model_name": "yolo11m-pose",
+            "task_type": "object detection",
+            "model_name": "yolov5m6u",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-pose.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5m6u.pt"
             }
         }
     },
     {
-        "Model": "YOLO11l-pose",
-        "Size (pixels)": "640",
-        "mAP": "66.1",
-        "params (M)": "26.2",
-        "FLOPs (B)": "90.7",
+        "Model": "YOLOv5l6u",
+        "Size (pixels)": "1280",
+        "mAP": "55.7",
+        "params (M)": "86.1",
+        "FLOPs (B)": "137.4",
         "meta": {
-            "task_type": "pose estimation",
-            "model_name": "yolo11l-pose",
+            "task_type": "object detection",
+            "model_name": "yolov5l6u",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l-pose.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5l6u.pt"
             }
         }
     },
     {
-        "Model": "YOLO11x-pose",
-        "Size (pixels)": "640",
-        "mAP": "69.5",
-        "params (M)": "58.8",
-        "FLOPs (B)": "203.3",
+        "Model": "YOLOv5x6u",
+        "Size (pixels)": "1280",
+        "mAP": "56.8",
+        "params (M)": "155.4",
+        "FLOPs (B)": "250.7",
         "meta": {
-            "task_type": "pose estimation",
-            "model_name": "yolo11x-pose",
+            "task_type": "object detection",
+            "model_name": "yolov5x6u",
             "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x-pose.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11n-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "38.9",
-        "mAP (mask)": "32.0",
-        "params (M)": "2.9",
-        "FLOPs (B)": "10.4",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolo11n-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11s-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "46.6",
-        "mAP (mask)": "37.8",
-        "params (M)": "10.1",
-        "FLOPs (B)": "35.5",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolo11s-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11m-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "51.5",
-        "mAP (mask)": "41.5",
-        "params (M)": "22.4",
-        "FLOPs (B)": "123.3",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolo11m-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11l-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "53.4",
-        "mAP (mask)": "42.9",
-        "params (M)": "27.6",
-        "FLOPs (B)": "142.2",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolo11l-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l-seg.pt"
-            }
-        }
-    },
-    {
-        "Model": "YOLO11x-seg",
-        "Size (pixels)": "640",
-        "mAP (box)": "54.7",
-        "mAP (mask)": "43.8",
-        "params (M)": "62.1",
-        "FLOPs (B)": "319.0",
-        "meta": {
-            "task_type": "instance segmentation",
-            "model_name": "yolo11x-seg",
-            "model_files": {
-                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x-seg.pt"
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov5x6u.pt"
             }
         }
     }

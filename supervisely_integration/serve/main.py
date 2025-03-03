@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 import supervisely as sly
-from supervisely_integration.serve.serve_yolo import YOLOServe
+from supervisely_integration.serve.serve_yolo import YOLOModel
 
 if sly.is_development():
     load_dotenv("local.env")
@@ -11,7 +11,7 @@ if sly.is_development():
 
 api = sly.Api.from_env()
 
-model = YOLOServe(
+model = YOLOModel(
     use_gui=True,
     use_serving_gui_template=True,
 )

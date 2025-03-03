@@ -23,10 +23,10 @@
 				"LOG_LEVEL": "DEBUG",
 				"DEBUG_APP_DIR": "app_data",
 				"APP_NAME": "Train YOLO",
-				"TASK_ID": "1764",
+				// "TASK_ID": "1764",
 				"TEAM_ID": "4",
 				"WORKSPACE_ID": "3",
-				"PROJECT_ID": "30",
+				"PROJECT_ID": "243",
 			}
 		},
 		{
@@ -51,7 +51,8 @@
 				"LOG_LEVEL": "DEBUG",
 				"DEBUG_APP_DIR": "app_data",
 				"DEBUG_WITH_SLY_NET": "1",
-				"APP_NAME": "Serve YOLO"
+				"APP_NAME": "Serve YOLO",
+				"TEAM_ID": "4"
 			}
 		},
 		{
@@ -63,7 +64,10 @@
 			"justMyCode": false,
 			"args": [
 				"predict",
-				"supervisely_integration/demo/img/coco_sample.jpg"
+				"supervisely_integration/demo/img/coco_sample.jpg",
+				"--model",
+				"YOLO11n-seg",
+				"--draw"
 			],
 			"env": {
 				"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}",
