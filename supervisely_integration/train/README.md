@@ -21,7 +21,7 @@
 
 # Overview
 
-This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection and instance segmentation. Support for pose estimation will be added in the upcoming releases.
+This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection and instance segmentation. Support for pose estimation will be added in the upcoming releases, meanwhile you can use [Train YOLOv8](https://ecosystem.supervisely.com/apps/yolov8/train) app for pose estimation.
 
 # How to Run
 
