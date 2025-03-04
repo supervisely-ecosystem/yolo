@@ -41,11 +41,13 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 
 **Step 4.** Select the model you want to train
 
-<img src="https://github.com/user-attachments/assets/fa55dafc-f345-4254-b029-19bb3221ea06" width="100%" style='padding-top: 10px'>  
+:information_source: The screenshot doesn’t include all the available models. You can view the complete list in the [models.json](../models.json) file.
+
+<img src="https://github.com/user-attachments/assets/fa4df097-4e8d-48ae-b53d-44ff8a7beb5a" width="100%" style='padding-top: 10px'>  
 
 **Step 5.** Configure hyperaparameters and select whether you want to use model evaluation and convert checkpoints to ONNX and TensorRT
 
-<img src="https://github.com/user-attachments/assets/d7181d7e-a8bc-46f6-bc70-e09c3d2a0fea" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/4cf73b4e-f3c8-47db-91c6-7145c2352274" width="100%" style='padding-top: 10px'>  
 
 **Step 6.** Enter experiment name and start training
 
