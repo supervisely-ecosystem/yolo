@@ -1,33 +1,17 @@
 import os
 import re
 from threading import Event
-from typing import Any, Dict, Generator, List, Literal, Union
+from typing import Any, Dict, Generator, List, Union
 
 import cv2
 import numpy as np
-import torch
 import torchvision.transforms as T
 import yaml
-from PIL import Image
 from ultralytics import YOLO
 
 import supervisely as sly
-from supervisely.nn.inference import (
-    CheckpointInfo,
-    ModelPrecision,
-    ModelSource,
-    RuntimeType,
-    TaskType,
-)
-from supervisely.nn.prediction_dto import (
-    PredictionBBox,
-    PredictionKeypoints,
-    PredictionMask,
-)
-from supervisely_integration.serve.keypoints_template import (
-    dict_to_template,
-    human_template,
-)
+from supervisely.nn.inference import ModelPrecision, ModelSource, RuntimeType, TaskType
+from supervisely.nn.prediction_dto import PredictionBBox, PredictionMask
 
 SERVE_PATH = "supervisely_integration/serve"
 
@@ -62,7 +46,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             self.classes = list(self.model.names.values())
             self._load_model_meta()
 
-    def _create_label(self, dto: Union[PredictionMask, PredictionBBox, PredictionKeypoints]):
+    def _create_label(self, dto: Union[PredictionMask, PredictionBBox]):
         if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
             obj_class = self.model_meta.get_obj_class(dto.class_name)
             if obj_class is None:
