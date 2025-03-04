@@ -29,9 +29,13 @@ RUN pip install --no-cache-dir \
     tensorboard==2.19.0 \
     tensorboardx==2.6.2.2 \
     onnx==1.17.0 \
-    tensorrt==10.8.0.43 \
-    pycuda==2025.1
+    onnxslim==0.1.48 \
+    onnxruntime==1.20.1 \
+    onnxruntime-gpu==1.20.1 \
+    tensorrt==10.8.0.43
 
-RUN pip install --no-cache-dir supervisely[training, tracking, model-benchmark]==6.73.319
+RUN pip install --no-cache-dir \ 
+    supervisely[training]==6.73.319 \
+    supervisely[model-benchmark]==6.73.319
 
 LABEL python_sdk_version=6.73.319

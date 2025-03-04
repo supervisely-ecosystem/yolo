@@ -10,7 +10,7 @@ load_dotenv("local.env")
 
 api: sly.Api = sly.Api.from_env()
 
-task_id = 68910  # <---- Change this to your task_id
+task_id = 71611  # <---- Change this to your task_id
 method = "deploy_from_api"
 
 
