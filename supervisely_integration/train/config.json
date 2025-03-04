@@ -27,7 +27,7 @@
 	"license": {
 		"type": "Apache-2.0"
 	},
-	"instance_version": "6.12.34",
+	"instance_version": "6.12.31",
 	"entrypoint": "python3 -m uvicorn main:train.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/train",
 	"port": 8000
 }
