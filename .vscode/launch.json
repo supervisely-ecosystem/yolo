@@ -63,11 +63,9 @@
 			"console": "integratedTerminal",
 			"justMyCode": false,
 			"args": [
-				"predict",
-				"supervisely_integration/demo/img/coco_sample.jpg",
+				"deploy",
 				"--model",
-				"YOLO11n-seg",
-				"--draw"
+				"app_data/work_dir/output/checkpoints/best.pt",
 			],
 			"env": {
 				"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}",

@@ -28,11 +28,9 @@ RUN pip install --no-cache-dir \
     ultralytics==8.3.80 \
     tensorboard==2.19.0 \
     tensorboardx==2.6.2.2 \
-    onnx==1.14.0 \
-    onnxruntime-gpu==1.15.1 \
-    tensorrt==10.8.0.43 \
     onnx==1.17.0 \
-    onnxruntime-gpu==1.20.1 
+    tensorrt==10.8.0.43 \
+    pycuda==2025.1
 
 RUN pip install --no-cache-dir supervisely[training, tracking, model-benchmark]==6.73.319
 

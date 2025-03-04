@@ -9,7 +9,7 @@ imgsz: 640 # (int | list) input images size as int for train and val modes, or l
 save: True # (bool) save train checkpoints and predict results
 save_period: 10 # (int) Save checkpoint every x epochs (disabled if < 1)
 workers: 8 # (int) number of worker threads for data loading (per RANK if DDP)
-optimizer: AdamW # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
+optimizer: auto # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
 verbose: False # (bool) whether to print verbose output
 seed: 0 # (int) random seed for reproducibility
 cos_lr: False # (bool) use cosine learning rate scheduler

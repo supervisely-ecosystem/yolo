@@ -30,7 +30,7 @@ train.register_inference_class(YOLOModel)
 
 @train.start
 def start_training():
-    """Start the training process with a clean, high-level workflow."""
+    """Start the training process."""
     data_config_path = convert_data()
     train_config = prepare_train_config(data_config_path)
 

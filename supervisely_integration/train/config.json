@@ -3,23 +3,31 @@
 	"version": "2.0.0",
 	"name": "Train YOLO",
 	"description": "Train YOLO models on your data",
-	"entrypoint": "python3 -m uvicorn main:train.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/train",
-	"port": 8000,
-	"categories": ["neural network", "images", "object detection", "train", "framework:YOLO"],
-	"icon": "https://github.com/user-attachments/assets/7dc4334b-5f50-4866-bc6a-1d36226bb093",
+	"poster": "https://github.com/user-attachments/assets/2fb7bf03-0b24-486b-bdf2-50091b354668",
+	"icon": "https://github.com/user-attachments/assets/a15f31d4-cf0d-40dc-a1a7-4a0988703467",
 	"icon_cover": true,
-	"poster": "https://github.com/user-attachments/assets/b4554de5-3d2c-4b4f-aba9-95864cb05289",
-	"docker_image": "supervisely/yolo:1.0.0",
-	"instance_version": "6.12.29",
+	"categories": [
+		"neural network",
+		"images",
+		"object detection",
+		"train",
+		"framework:YOLO"
+	],
 	"task_location": "workspace_tasks",
+	"docker_image": "supervisely/yolo:1.0.0",
+	"community_agent": false,
 	"need_gpu": true,
 	"gpu": "required",
-	"community_agent": false,
 	"context_menu": {
-		"target": ["images_project"],
+		"target": [
+			"images_project"
+		],
 		"context_root": "Neural Networks"
 	},
 	"license": {
 		"type": "Apache-2.0"
-	}
+	},
+	"instance_version": "6.12.34",
+	"entrypoint": "python3 -m uvicorn main:train.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/train",
+	"port": 8000
 }

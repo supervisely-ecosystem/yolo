@@ -1,0 +1,63 @@
+{
+    "description": "",
+    "size": {
+        "height": 480,
+        "width": 640
+    },
+    "tags": [],
+    "objects": [
+        {
+            "classTitle": "kiwi",
+            "description": "",
+            "tags": [
+                {
+                    "name": "confidence",
+                    "value": 0.2987396717071533
+                }
+            ],
+            "points": {
+                "exterior": [
+                    [
+                        281,
+                        170
+                    ],
+                    [
+                        409,
+                        201
+                    ]
+                ],
+                "interior": []
+            },
+            "geometryType": "rectangle",
+            "shape": "rectangle",
+            "classId": 70
+        },
+        {
+            "classTitle": "lemon",
+            "description": "",
+            "tags": [
+                {
+                    "name": "confidence",
+                    "value": 0.2904198467731476
+                }
+            ],
+            "points": {
+                "exterior": [
+                    [
+                        178,
+                        1
+                    ],
+                    [
+                        438,
+                        173
+                    ]
+                ],
+                "interior": []
+            },
+            "geometryType": "rectangle",
+            "shape": "rectangle",
+            "classId": 71
+        }
+    ],
+    "customBigData": {}
+}
