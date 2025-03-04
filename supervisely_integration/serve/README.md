@@ -24,7 +24,7 @@ Serve different checkpoints from YOLO architecures as a Supervisely Application.
 
 You can deploy models in optimized runtimes:
 
-- **TensorRT** is a very optimized environment for Nvidia GPU devices. TensorRT can significantly boost the inference speed. Additionally, you can select *FP16 mode* to reduce GPU memory usage and further increase speed. Usually, the accuracy of predictions remains the same.
+- **TensorRT** is a very optimized environment for Nvidia GPU devices. TensorRT can significantly boost the inference speed.
 - **ONNXRuntime** can speed up inference on some CPU and GPU devices.
 
 # How to Run
