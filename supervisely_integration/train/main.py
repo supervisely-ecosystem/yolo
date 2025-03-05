@@ -24,8 +24,8 @@ train = TrainApp(
     f"{base_path}/app_options.yaml",
 )
 
-train.register_inference_class(YOLOModel)
-# train.gui.load_from_app_state("supervisely_integration/train/app_state.json")
+inference_settings = "supervisely_integration/serve/inference_settings.yaml"
+train.register_inference_class(YOLOModel, inference_settings)
 
 
 @train.start
