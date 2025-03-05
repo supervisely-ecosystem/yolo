@@ -103,6 +103,7 @@ def prepare_train_config(data_config_path):
             "project": join(getcwd(), train.output_dir),
             "name": "ultralytics",
             "cache": False,
+            "save": True,
         }
     )
     return train_config
