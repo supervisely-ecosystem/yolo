@@ -83,9 +83,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             n_label2point[node] = keypoint
         return n_label2point
 
-    def _to_dto(
-        self, prediction, settings: dict
-    ) -> List[Union[PredictionMask, PredictionBBox, PredictionKeypoints]]:
+    def _to_dto(self, prediction, settings: dict) -> List[Union[PredictionMask, PredictionBBox]]:
         """Converts YOLO Results to a List of Prediction DTOs."""
         dtos = []
         if self.task_type == TaskType.OBJECT_DETECTION:
