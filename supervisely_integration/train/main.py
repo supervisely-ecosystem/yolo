@@ -1,3 +1,7 @@
+from supervisely_integration.monkey_patching_fix import monkey_patching_fix
+
+monkey_patching_fix()
+
 from os import getcwd, rename
 from os.path import join
 
