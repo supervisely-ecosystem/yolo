@@ -2,13 +2,11 @@
 
 After you've trained a model in Supervisely, you can download the checkpoint from Team Files and use it as a simple PyTorch model without Supervisely Platform.
 
-
 **Quick start:**
 
-1. **Set up environment**. Install [requirements](https://github.com/supervisely-ecosystem/RT-DETRv2/blob/main/rtdetrv2_pytorch/requirements.txt) manually, or use our pre-built docker image [DockerHub](https://hub.docker.com/r/supervisely/rt-detrv2/tags). Clone [RT-DETRv2](https://github.com/supervisely-ecosystem/RT-DETRv2) repository with model implementation.
+1. **Set up environment**. Install [requirements](https://github.com/supervisely-ecosystem/yolo/blob/main/requirements.txt) manually, or use our pre-built docker image from [DockerHub](https://hub.docker.com/r/supervisely/rt-detrv2/tags). Clone [YOLO](https://github.com/supervisely-ecosystem/yolo) repository with model implementation.
 2. **Download** your checkpoint and model files from Supervisely Platform.
-3. **Run inference**. Refer to our demo scripts: [demo_pytorch.py](https://github.com/supervisely-ecosystem/RT-DETRv2/blob/main/supervisely_integration/demo/demo_pytorch.py), [demo_onnx.py](https://github.com/supervisely-ecosystem/RT-DETRv2/blob/main/supervisely_integration/demo/demo_onnx.py), [demo_tensorrt.py](https://github.com/supervisely-ecosystem/RT-DETRv2/blob/main/supervisely_integration/demo/demo_tensorrt.py)
-
+3. **Run inference**. Refer to our demo scripts: [demo_pytorch.py](https://github.com/supervisely-ecosystem/yolo/blob/main/supervisely_integration/demo/demo_pytorch.py), [demo_onnx.py](https://github.com/supervisely-ecosystem/yolo/blob/main/supervisely_integration/demo/demo_onnx.py), [demo_tensorrt.py](https://github.com/supervisely-ecosystem/yolo/blob/main/supervisely_integration/demo/demo_tensorrt.py)
 
 ## Step-by-step guide:
 
@@ -17,34 +15,34 @@ After you've trained a model in Supervisely, you can download the checkpoint fro
 **Manual installation:**
 
 ```bash
-git clone https://github.com/supervisely-ecosystem/RT-DETRv2
-cd RT-DETRv2
-pip install -r rtdetrv2_pytorch/requirements.txt
+git clone https://github.com/supervisely-ecosystem/yolo
+cd yolo
+pip install -r requirements.txt
 ```
 
 **Using docker image (advanced):**
 
-We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/rt-detrv2/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
+We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/yolo/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
 
 ```bash
-docker pull supervisely/rt-detrv2:1.0.2
+docker pull supervisely/yolo:1.0.0
 ```
 
-See our [Dockerfile](https://github.com/supervisely-ecosystem/RT-DETRv2/blob/main/docker/Dockerfile) for more details.
+See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/main/docker/Dockerfile) for more details.
 
 Docker image does not include the source code. Clone the repository inside the container:
 
 ```bash
-git clone https://github.com/supervisely-ecosystem/RT-DETRv2
+git clone https://github.com/supervisely-ecosystem/yolo
 ```
 
 ### 2. Download checkpoint and model files from Supervisely Platform
 
-For RT-DETRv2, you need to download the following files:
+For YOLO, you need to download the following files:
 
 **For PyTorch inference:**
-- `checkpoint.pth` - model weights, for example `best.pth`
-- `model_config.yml` - model configuration
+
+- `checkpoint.pt` - model weights, for example `best.pt`
 - `model_meta.json` - class names
 
 **ONNXRuntime and TensorRT inference require only \*.onnx and \*.engine files respectively.**
