@@ -10,3 +10,4 @@ app_data/
 benchmark/
 train/app_state.json
 models.json
+supervisely_integration/train/app_state.json
