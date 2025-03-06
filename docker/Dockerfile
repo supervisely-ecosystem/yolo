@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.2.2-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/usr/src/tensorrt/bin:${PATH}"
@@ -15,11 +15,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libmagic-dev \
     libexiv2-dev \
     libboost-all-dev \
-    tensorrt
-
-RUN ln -s /usr/bin/python3 /usr/bin/python \
+    tensorrt \
+    libcudnn9-cuda-12 \
+    libcudnn9-dev-cuda-12 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN pip install --no-cache-dir \
     setuptools==69.5.1 \
