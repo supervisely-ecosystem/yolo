@@ -1,7 +1,3 @@
-from supervisely_integration.monkey_patching_fix import monkey_patching_fix
-
-monkey_patching_fix()
-
 import os
 import re
 from threading import Event
