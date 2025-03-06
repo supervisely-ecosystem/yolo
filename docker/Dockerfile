@@ -31,8 +31,7 @@ RUN pip install --no-cache-dir \
     onnx==1.17.0 \
     onnxslim==0.1.48 \
     onnxruntime==1.20.1 \
-    onnxruntime-gpu==1.20.1 \
-    tensorrt==10.8.0.43
+    onnxruntime-gpu==1.20.1
 
 RUN pip install --no-cache-dir \ 
     supervisely[training]==6.73.319 \
