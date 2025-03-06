@@ -34,7 +34,7 @@ RUN pip install --no-cache-dir \
     onnxruntime-gpu==1.20.1
 
 RUN pip install --no-cache-dir \ 
-    supervisely[training]==6.73.319 \
-    supervisely[model-benchmark]==6.73.319
+    supervisely[training]==6.73.324 \
+    supervisely[model-benchmark]==6.73.324
 
-LABEL python_sdk_version=6.73.319
+LABEL python_sdk_version=6.73.324
