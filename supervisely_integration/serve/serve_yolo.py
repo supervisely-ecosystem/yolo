@@ -9,7 +9,6 @@ from typing import Any, Dict, Generator, List, Union
 
 import cv2
 import numpy as np
-import torch
 import yaml
 from ultralytics import YOLO
 
@@ -234,7 +233,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
 
     def _check_onnx_device(self, device: str):
         import onnxruntime as ort
-        import torch
 
         providers = ort.get_available_providers()
         if device.startswith("cuda") and "CUDAExecutionProvider" not in providers:

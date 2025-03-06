@@ -30,7 +30,6 @@ RUN pip install --no-cache-dir \
     tensorboardx==2.6.2.2 \
     onnx==1.17.0 \
     onnxslim==0.1.48 \
-    onnxruntime==1.20.1 \
     onnxruntime-gpu==1.20.1
 
 RUN pip install --no-cache-dir \ 
