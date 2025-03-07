@@ -4,17 +4,12 @@ from os.path import join
 from ultralytics import YOLO
 from ultralytics.utils import SettingsManager
 
+from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource, TaskType
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
 from supervisely_integration.train.trainer import Trainer
-
-sly_yolo_task_map = {
-    TaskType.OBJECT_DETECTION: "detect",
-    TaskType.INSTANCE_SEGMENTATION: "segment",
-    TaskType.POSE_ESTIMATION: "pose",
-}
 
 base_path = "supervisely_integration/train"
 train = TrainApp(
@@ -95,7 +90,7 @@ def prepare_train_config(data_config_path):
     train_config = {**train.hyperparameters}
     train_config.update(
         {
-            "task": sly_yolo_task_map[train.task_type],
+            "task": SLY_YOLO_TASK_TYPE_MAP[train.task_type],
             "mode": "train",
             "model": checkpoint_path,
             "data": data_config_path,

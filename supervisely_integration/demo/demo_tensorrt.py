@@ -1,66 +1,23 @@
-import json
+from os.path import join
 
 import torch
-import torchvision.transforms as T
-from PIL import Image, ImageDraw
+from ultralytics import YOLO
 
-assert torch.cuda.is_available(), "TensorRT only supports GPU mode"
-device = "cuda"
+from supervisely.io.fs import get_file_ext, get_file_name
 
+# Predict settings
+device = "cuda" if torch.cuda.is_available() else "cpu"
+task = "detect"
 
-engine_path = "model/best.engine"  # put your tensorrt model (*.engine) file here
-model_meta_path = "model/model_meta.json"  # put your model meta file here
-image_path = "img/coco_sample.jpg"  # put your image file here
+# Put your files here
+demo_dir = join("supervisely_integration", "demo")
+checkpoint_name = "best.engine"
+checkpoint_path = join(demo_dir, "model", checkpoint_name)
+image_path = join(demo_dir, "img", "coco_sample.jpg")
+result_path = join(demo_dir, "img", f"result_{get_file_name(image_path)}{get_file_ext(image_path)}")
 
-
-def draw(images, labels, boxes, scores, classes, thrh=0.5):
-    for i, im in enumerate(images):
-        draw = ImageDraw.Draw(im)
-        scr = scores[i]
-        lab = labels[i][scr > thrh]
-        box = boxes[i][scr > thrh]
-        for l, b in enumerate(box):
-            draw.rectangle(
-                list(b),
-                outline="red",
-            )
-            draw.text(
-                (b[0], b[1]),
-                text=str(classes[lab[l].item()]),
-                fill="blue",
-            )
-
-
-if __name__ == "__main__":
-
-    # load class names
-    with open(model_meta_path, "r") as f:
-        model_meta = json.load(f)
-    classes = [c["title"] for c in model_meta["classes"]]
-
-    # load model
-    model = TRTInference(engine_path, device=device)
-    transforms = T.Compose(
-        [
-            T.Resize((640, 640)),
-            T.ToTensor(),
-        ]
-    )
-
-    # prepare image
-    im_pil = Image.open(image_path).convert("RGB")
-    w, h = im_pil.size
-    orig_size = torch.tensor([w, h])[None].to(device)
-    im_data = transforms(im_pil)[None]
-
-    # inference
-    output = model(
-        {
-            "images": im_data.to(device),
-            "orig_target_sizes": orig_size.to(device),
-        }
-    )
-
-    # save result
-    draw([im_pil], output["labels"], output["boxes"], output["scores"], classes)
-    im_pil.save("result.jpg")
+# Load model and predict
+model = YOLO(checkpoint_path, task)
+results = model.predict(source=image_path, device=device)
+for result in results:
+    result.save(filename=result_path)

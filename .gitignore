@@ -11,3 +11,4 @@ benchmark/
 train/app_state.json
 models.json
 supervisely_integration/train/app_state.json
+supervisely_integration/demo/model
