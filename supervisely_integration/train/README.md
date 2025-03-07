@@ -94,7 +94,7 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 
 <img src="https://github.com/user-attachments/assets/cb50e8e1-9e10-4195-b000-c694358f5ab1" width="100%" style='padding-top: 10px'>  
 
-**Step 3.** Select the classes you want to train RT-DETRv2 on
+**Step 3.** Select the classes you want to train on
 
 <img src="https://github.com/user-attachments/assets/7b5d22a8-6c43-4b3f-b262-01a9ed2e58d4" width="100%" style='padding-top: 10px'>  
 
