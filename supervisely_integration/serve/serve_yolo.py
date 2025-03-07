@@ -308,6 +308,16 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         self._model_meta = sly.ProjectMeta(obj_classes=sly.ObjClassCollection(obj_classes))
         self._get_confidence_tag_meta()
 
+    def get_info(self):
+        info = super().get_info()
+        info["task type"] = self.task_type
+        info["videos_support"] = True
+        info["async_video_inference_support"] = True
+        info["tracking_on_videos_support"] = True
+        if self.task_type == TaskType.POSE_ESTIMATION:
+            info["detector_included"] = True
+        return info
+
 
 def parse_model_name(checkpoint_name: str):
     # yolov8n
