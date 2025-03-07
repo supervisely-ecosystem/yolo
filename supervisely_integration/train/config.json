@@ -1,7 +1,7 @@
 {
 	"type": "app",
 	"version": "2.0.0",
-	"name": "Train YOLO",
+	"name": "Train YOLO v8 - v12",
 	"description": "Train YOLO models on your data",
 	"poster": "https://github.com/user-attachments/assets/ffb1a3b8-0861-4292-9472-96ce6601e8ff",
 	"icon": "https://github.com/user-attachments/assets/d72ca13c-e5e2-4e01-8813-2b1ed5e94cb2",

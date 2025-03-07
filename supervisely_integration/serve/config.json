@@ -1,7 +1,7 @@
 {
 	"type": "app",
 	"version": "2.0.0",
-	"name": "Serve YOLO",
+	"name": "Serve YOLO v8 - v12",
 	"description": "Deploy YOLO models as a REST API service",
 	"poster": "https://github.com/user-attachments/assets/f1fffbf3-bfd1-474e-8826-d0295c403946",
 	"icon": "https://github.com/user-attachments/assets/828daa0f-6e32-4ee1-8153-c3c8a6ece510",
