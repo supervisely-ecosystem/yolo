@@ -7,6 +7,7 @@ import numpy as np
 from ultralytics import YOLO
 
 import supervisely as sly
+from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
 from supervisely.nn.inference import ModelPrecision, ModelSource, RuntimeType, TaskType
 from supervisely.nn.prediction_dto import PredictionBBox, PredictionMask
 
@@ -186,30 +187,28 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         return self._load_runtime(weights_path, "engine", dynamic=False)
 
     def _load_runtime(self, weights_path: str, format: str, **kwargs):
+        def export_model():
+            sly.logger.info(f"Exporting model to '{format}' format...")
+            if self.gui is not None:
+                bar = self.gui.download_progress(
+                    message=f"Exporting model to '{format}' format...", total=1
+                )
+                self.gui.download_progress.show()
+            model = YOLO(weights_path)
+            model.export(format=format, **kwargs)
+            if self.gui is not None:
+                bar.update(1)
+                self.gui.download_progress.hide()
+
         if weights_path.endswith(".pt"):
             exported_weights_path = weights_path.replace(".pt", f".{format}")
-            model = None
-            if not os.path.exists(exported_weights_path):
-                sly.logger.info(f"Exporting model to '{format}' format...")
-                if self.gui is not None:
-                    bar = self.gui.download_progress(
-                        message=f"Exporting model to '{format}' format...", total=1
-                    )
-                    self.gui.download_progress.show()
-                model = YOLO(weights_path)
-                model.export(format=format, **kwargs)
-                if self.gui is not None:
-                    bar.update(1)
-                    self.gui.download_progress.hide()
+            file_name = sly.fs.get_file_name(weights_path)
+            if file_name == "best" or not os.path.exists(exported_weights_path):
+                export_model()
         else:
             exported_weights_path = weights_path
 
-        task_type_map = {
-            TaskType.OBJECT_DETECTION: "detect",
-            TaskType.INSTANCE_SEGMENTATION: "segment",
-        }
-
-        model = YOLO(exported_weights_path, task=task_type_map[self.task_type])
+        model = YOLO(exported_weights_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
         return model
 
     def _load_model_meta(self):
