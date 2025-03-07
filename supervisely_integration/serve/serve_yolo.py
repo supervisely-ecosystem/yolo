@@ -41,9 +41,8 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             self.model = self._load_tensorrt(checkpoint_path)
             self.max_batch_size = 1
 
-        if model_source == ModelSource.PRETRAINED:
-            self.classes = list(self.model.names.values())
-            self._load_model_meta()
+        self.classes = list(self.model.names.values())
+        self._load_model_meta()
 
     def _create_label(self, dto: Union[PredictionMask, PredictionBBox]):
         if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
