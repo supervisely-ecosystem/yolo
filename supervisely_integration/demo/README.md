@@ -41,7 +41,7 @@ git clone https://github.com/supervisely-ecosystem/yolo
 For YOLO, you need to download only the checkpoint file.
 
 - **For PyTorch inference:** models can be found in the `checkpoints` folder in Team Files after training.
-- **For ONNXRuntime and TensorRT inference:** models can be found in the `export` folder in Team Files after training.
+- **For ONNXRuntime and TensorRT inference:** models can be found in the `export` folder in Team Files after training. If you don't see the `export` folder, please ensure that the model was exported to `ONNX` or `TensorRT` format during training.
 
 Go to Team Files in Supervisely Platform and download the files.
 
