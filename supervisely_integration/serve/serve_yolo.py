@@ -208,6 +208,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             exported_weights_path = weights_path
 
         model = YOLO(exported_weights_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
+        model.to(self.device)
         return model
 
     def _load_model_meta(self):
