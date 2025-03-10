@@ -43,6 +43,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
 
         self.classes = list(self.model.names.values())
         self._load_model_meta()
+        sly.logger.debug(f"Model has been loaded onto device: {self.model.device}")
 
     def _create_label(self, dto: Union[PredictionMask, PredictionBBox]):
         if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
@@ -120,7 +121,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             conf=settings["conf"],
             iou=settings["iou"],
             half=settings["half"],
-            device=self.device,
             max_det=settings["max_det"],
             agnostic_nms=settings["agnostic_nms"],
             retina_masks=retina_masks,
@@ -140,7 +140,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             conf=settings["conf"],
             iou=settings["iou"],
             half=settings["half"],
-            device=self.device,
             max_det=settings["max_det"],
             agnostic_nms=settings["agnostic_nms"],
             retina_masks=retina_masks,

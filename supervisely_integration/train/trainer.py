@@ -7,6 +7,7 @@ class Trainer:
     def __init__(self, train_config: dict):
         """Initialize the Trainer with a model and training configuration."""
         self.model = YOLO(train_config["model"])
+        self.model.to(train_config["device"])
         self.train_config = train_config
         self.setup_callbacks()
 
