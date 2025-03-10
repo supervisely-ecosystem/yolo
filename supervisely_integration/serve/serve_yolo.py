@@ -179,10 +179,14 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         return model
 
     def _load_onnx(self, weights_path: str):
-        return self._load_runtime(weights_path, "onnx", dynamic=True)
+        device_id = int(self.device.split(":")[-1]) if ":" in self.device else 0
+        os.environ["CUDA_VISIBLE_DEVICES"] = str(device_id)
+        return self._load_runtime(weights_path, "onnx", dynamic=True, device=self.device)
 
     def _load_tensorrt(self, weights_path: str):
-        return self._load_runtime(weights_path, "engine", dynamic=False)
+        device_id = int(self.device.split(":")[-1]) if ":" in self.device else 0
+        os.environ["CUDA_VISIBLE_DEVICES"] = str(device_id)
+        return self._load_runtime(weights_path, "engine", dynamic=False, device=self.device)
 
     def _load_runtime(self, weights_path: str, format: str, **kwargs):
         def export_model():
@@ -193,6 +197,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                 )
                 self.gui.download_progress.show()
             model = YOLO(weights_path)
+            model.to(self.device)
             model.export(format=format, **kwargs)
             if self.gui is not None:
                 bar.update(1)
