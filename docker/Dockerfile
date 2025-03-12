@@ -32,7 +32,7 @@ RUN pip install --no-cache-dir \
     onnxruntime-gpu==1.20.1
 
 RUN pip install --no-cache-dir \ 
-    ultralytics==8.3.88
+    ultralytics==8.3.83
 
 RUN pip install --no-cache-dir \ 
     supervisely[training]==6.73.327 \
