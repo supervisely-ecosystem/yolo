@@ -64,7 +64,7 @@
 			"args": [
 				"deploy",
 				"--model",
-				"app_data/work_dir/output/checkpoints/best.pt",
+				"yolo12m",
 			],
 			"env": {
 				"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}",
