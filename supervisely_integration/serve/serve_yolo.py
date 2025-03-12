@@ -41,7 +41,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             self.model = self._load_tensorrt(checkpoint_path)
             self.max_batch_size = 1
 
-        sly.logger.info(f"Selected device: {self.model.device}")
         self.classes = list(self.model.names.values())
         self._load_model_meta()
 
@@ -136,8 +135,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         # RGB to BGR
         images_np = [cv2.cvtColor(img, cv2.COLOR_RGB2BGR) for img in images_np]
         retina_masks = self.task_type == TaskType.INSTANCE_SEGMENTATION
-
-        sly.logger.info(f"Device before prediction: {self.model.device}")
         predictions = self.model(
             source=images_np,
             conf=settings["conf"],
