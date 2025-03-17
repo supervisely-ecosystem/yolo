@@ -1,5 +1,5 @@
 services:
-  rtdetrv2:
+  yolo:
     image: supervisely/yolo:1.0.0
     shm_size: 1g
     runtime: nvidia
