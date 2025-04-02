@@ -89,7 +89,7 @@ You can deploy models in optimized runtimes:
 
 # How to Run
 
-0. Start the application from an app's context menu or the Ecosystem.
+0. Start the application from the project context menu or the Ecosystem.
 
 1. Select pre-trained model or custom model trained inside Supervisely platform, and a runtime for inference (screenshot doesn’t include all the available models. You can view the complete list in the [overview](#overview) section).
 
