@@ -11,6 +11,8 @@
 		"images",
 		"object detection",
 		"instance segmentation",
+		"detection & tracking",
+		"segmentation & tracking",
 		"train",
 		"framework:YOLO"
 	],
