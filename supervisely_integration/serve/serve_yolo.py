@@ -96,20 +96,11 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             if prediction.masks:
                 masks = prediction.masks.data
                 for box, mask in zip(boxes_data, masks):
-                    left, top, right, bottom, confidence, cls_index = (
-                        int(box[0]),
-                        int(box[1]),
-                        int(box[2]),
-                        int(box[3]),
-                        float(box[4]),
-                        int(box[5]),
-                    )
+                    confidence = float(box[4])
+                    cls_index = int(box[5])
                     mask = mask.cpu().numpy()
-                    mask_class_name = self.classes[cls_index]
-                    dtos.append(PredictionMask(mask_class_name, mask, confidence))
-                    bbox_class_name = self.classes[cls_index] + "_bbox"
-                    bbox = [top, left, bottom, right]
-                    dtos.append(PredictionBBox(bbox_class_name, bbox, confidence))
+                    class_name = self.classes[cls_index]
+                    dtos.append(PredictionMask(class_name, mask, confidence))
         return dtos
 
     def predict_video(self, video_path: str, settings: Dict[str, Any], stop: Event) -> Generator:
@@ -216,12 +207,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             obj_classes = [sly.ObjClass(name, sly.Rectangle) for name in self.class_names]
         elif self.task_type == TaskType.INSTANCE_SEGMENTATION:
             self.general_class_names = list(self.model.names.values())
-            bbox_class_names = [f"{cls}_bbox" for cls in self.class_names]
-            mask_class_names = self.class_names
-            self.class_names = bbox_class_names + mask_class_names
-            bbox_obj_classes = [sly.ObjClass(name, sly.Rectangle) for name in bbox_class_names]
-            mask_obj_classes = [sly.ObjClass(name, sly.Bitmap) for name in mask_class_names]
-            obj_classes = bbox_obj_classes + mask_obj_classes
+            obj_classes = [sly.ObjClass(name, sly.Bitmap) for name in self.class_names]
         self._model_meta = sly.ProjectMeta(obj_classes=sly.ObjClassCollection(obj_classes))
         self._get_confidence_tag_meta()
 
