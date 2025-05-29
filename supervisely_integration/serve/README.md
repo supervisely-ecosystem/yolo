@@ -1,6 +1,6 @@
 <div align="center" markdown>
 
-<img src="https://github.com/user-attachments/assets/f1fffbf3-bfd1-474e-8826-d0295c403946"/>  
+<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_serve_yolo.jpg"/>  
 
 # Serve YOLO
 
