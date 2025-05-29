@@ -10,6 +10,9 @@
 		"neural network",
 		"images",
 		"object detection",
+		"instance segmentation",
+		"detection & tracking",
+		"segmentation & tracking",
 		"train",
 		"framework:YOLO"
 	],
@@ -24,10 +27,28 @@
 		],
 		"context_root": "Neural Networks"
 	},
-	"license": {
-		"type": "Apache-2.0"
-	},
+  	"license": {
+    		"type": "AGPL-3.0"
+  	},
 	"instance_version": "6.12.34",
 	"entrypoint": "python3 -m uvicorn main:train.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/train",
-	"port": 8000
+	"port": 8000,
+	"framework": {
+		"name": "YOLO v8-v12",
+		"conference": null,
+		"released": 2025,
+		"tasks": {
+			"object detection": {
+				"metric": 55.2,
+				"models": 37
+			},
+			"instance segmentation": {
+				"metric": 43.8,
+				"models": 12
+			}
+		},
+		"real_time": true,
+		"onnx": true,
+		"tensorrt": true
+	}
 }
