@@ -35,7 +35,7 @@ RUN pip install --no-cache-dir \
     ultralytics==8.3.83
 
 RUN pip install --no-cache-dir \ 
-    supervisely[training]==6.73.370 \
-    supervisely[model-benchmark]==6.73.370
+    supervisely[training]==6.73.372 \
+    supervisely[model-benchmark]==6.73.372
 
-LABEL python_sdk_version=6.73.370
+LABEL python_sdk_version=6.73.372
