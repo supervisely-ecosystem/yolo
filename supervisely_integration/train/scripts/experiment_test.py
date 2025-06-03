@@ -3,8 +3,6 @@ import os
 from dotenv import load_dotenv
 
 import supervisely as sly
-from supervisely.template.experiment.experiment_generator import ExperimentGenerator
-from supervisely_integration.serve.main import RTDETRv2
 
 if sly.is_development():
     load_dotenv("local.env")
