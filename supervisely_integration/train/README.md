@@ -1,6 +1,6 @@
 <div align="center" markdown>
 
-<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_train_yolo.jpg"/>  
+<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_train_yolo.jpg"/>
 
 # Train YOLO
 
@@ -27,7 +27,7 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 **Object Detection models**
 
 | Model                        | Size (px) | mAP  | Params (M) | FLOPs (B) | Checkpoint                                                                                 |
-|------------------------------|-----------|------|------------|-----------|--------------------------------------------------------------------------------------------|
+| ---------------------------- | --------- | ---- | ---------- | --------- | ------------------------------------------------------------------------------------------ |
 | YOLO12n                      | 640       | 40.6 | 2.6        | 6.5       | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12n.pt)      |
 | YOLO12s                      | 640       | 48.0 | 9.3        | 21.4      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12s.pt)      |
 | YOLO12m                      | 640       | 52.5 | 20.2       | 67.5      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12m.pt)      |
@@ -69,7 +69,7 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 **Instance Segmentation models**
 
 | Model       | Size (px) | mAP (box) | mAP (mask) | Params (M) | FLOPs (B) | Checkpoint                                                                                |
-|-------------|-----------|-----------|------------|------------|-----------|-------------------------------------------------------------------------------------------|
+| ----------- | --------- | --------- | ---------- | ---------- | --------- | ----------------------------------------------------------------------------------------- |
 | YOLO11n-seg | 640       | 38.9      | 32.0       | 2.9        | 10.4      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-seg.pt) |
 | YOLO11s-seg | 640       | 46.6      | 37.8       | 10.1       | 35.5      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-seg.pt) |
 | YOLO11m-seg | 640       | 51.5      | 41.5       | 22.4       | 123.3     | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-seg.pt) |
@@ -89,33 +89,33 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 
 **Step 1.** Select if you want to use cached project or redownload it
 
-<img src="https://github.com/user-attachments/assets/2b5f867e-7d99-4c06-9a4c-96ba29523941" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/2b5f867e-7d99-4c06-9a4c-96ba29523941" width="100%" style='padding-top: 10px'>
 
 **Step 2.** Select train / val split
 
-<img src="https://github.com/user-attachments/assets/cb50e8e1-9e10-4195-b000-c694358f5ab1" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/cb50e8e1-9e10-4195-b000-c694358f5ab1" width="100%" style='padding-top: 10px'>
 
 **Step 3.** Select the classes you want to train on
 
-<img src="https://github.com/user-attachments/assets/7b5d22a8-6c43-4b3f-b262-01a9ed2e58d4" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/7b5d22a8-6c43-4b3f-b262-01a9ed2e58d4" width="100%" style='padding-top: 10px'>
 
 **Step 4.** Select the model you want to train
 
 The screenshot doesn’t include all the available models. You can view the complete list in the [overview](#overview) section.
 
-<img src="https://github.com/user-attachments/assets/fa4df097-4e8d-48ae-b53d-44ff8a7beb5a" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/fa4df097-4e8d-48ae-b53d-44ff8a7beb5a" width="100%" style='padding-top: 10px'>
 
 **Step 5.** Configure hyperaparameters and select whether you want to use model evaluation and convert checkpoints to ONNX and TensorRT
 
-<img src="https://github.com/user-attachments/assets/4cf73b4e-f3c8-47db-91c6-7145c2352274" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/4cf73b4e-f3c8-47db-91c6-7145c2352274" width="100%" style='padding-top: 10px'>
 
 **Step 6.** Enter experiment name and start training
 
-<img src="https://github.com/user-attachments/assets/fdb2943d-7ee2-4ff8-8616-3587911ce270" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/fdb2943d-7ee2-4ff8-8616-3587911ce270" width="100%" style='padding-top: 10px'>
 
 **Step 7.** Monitor training progress
 
-<img src="https://github.com/user-attachments/assets/41f2d8b3-dd5a-4f4c-9605-1a3fa5e89827" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/41f2d8b3-dd5a-4f4c-9605-1a3fa5e89827" width="100%" style='padding-top: 10px'>
 
 # Obtain saved checkpoints
 
@@ -123,7 +123,7 @@ All trained checkpoints that are generated through the training process are stor
 
 You will see a folder thumbnail with a link to your saved checkpoints by the end of training process.
 
-<img src="https://github.com/user-attachments/assets/10a7a32a-8adc-4cc0-b05d-ff1ef8e08552" width="100%" style='padding-top: 10px'>  
+<img src="https://github.com/user-attachments/assets/10a7a32a-8adc-4cc0-b05d-ff1ef8e08552" width="100%" style='padding-top: 10px'>
 
 # How to use your checkpoints outside Supervisely Platform
 
@@ -152,7 +152,7 @@ pip install -r requirements.txt
 We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/yolo/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
 
 ```bash
-docker pull supervisely/yolo:1.0.2
+docker pull supervisely/yolo:1.0.3
 ```
 
 See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/master/docker/Dockerfile) for more details.
@@ -181,7 +181,6 @@ We provide several demo scripts to run inference with your checkpoint:
 - [demo_pytorch.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_pytorch.py) - simple PyTorch inference
 - [demo_onnx.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_onnx.py) - ONNXRuntime inference
 - [demo_tensorrt.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_tensorrt.py) - TensorRT inference
-
 
 # Acknowledgment
 

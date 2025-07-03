@@ -1,6 +1,6 @@
 <div align="center" markdown>
 
-<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_serve_yolo.jpg"/>  
+<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_serve_yolo.jpg"/>
 
 # Serve YOLO
 
@@ -31,7 +31,7 @@ You can deploy models in optimized runtimes:
 **Object Detection models**
 
 | Model                        | Size (px) | mAP  | Params (M) | FLOPs (B) | Checkpoint                                                                                 |
-|------------------------------|-----------|------|------------|-----------|--------------------------------------------------------------------------------------------|
+| ---------------------------- | --------- | ---- | ---------- | --------- | ------------------------------------------------------------------------------------------ |
 | YOLO12n                      | 640       | 40.6 | 2.6        | 6.5       | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12n.pt)      |
 | YOLO12s                      | 640       | 48.0 | 9.3        | 21.4      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12s.pt)      |
 | YOLO12m                      | 640       | 52.5 | 20.2       | 67.5      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12m.pt)      |
@@ -73,7 +73,7 @@ You can deploy models in optimized runtimes:
 **Instance Segmentation models**
 
 | Model       | Size (px) | mAP (box) | mAP (mask) | Params (M) | FLOPs (B) | Checkpoint                                                                                |
-|-------------|-----------|-----------|------------|------------|-----------|-------------------------------------------------------------------------------------------|
+| ----------- | --------- | --------- | ---------- | ---------- | --------- | ----------------------------------------------------------------------------------------- |
 | YOLO11n-seg | 640       | 38.9      | 32.0       | 2.9        | 10.4      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-seg.pt) |
 | YOLO11s-seg | 640       | 46.6      | 37.8       | 10.1       | 35.5      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-seg.pt) |
 | YOLO11m-seg | 640       | 51.5      | 41.5       | 22.4       | 123.3     | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-seg.pt) |
@@ -134,7 +134,7 @@ pip install -r requirements.txt
 We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/yolo/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
 
 ```bash
-docker pull supervisely/yolo:1.0.2
+docker pull supervisely/yolo:1.0.3
 ```
 
 See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/master/docker/Dockerfile) for more details.
@@ -163,7 +163,6 @@ We provide several demo scripts to run inference with your checkpoint:
 - [demo_pytorch.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_pytorch.py) - simple PyTorch inference
 - [demo_onnx.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_onnx.py) - ONNXRuntime inference
 - [demo_tensorrt.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_tensorrt.py) - TensorRT inference
-
 
 # Acknowledgment
 
