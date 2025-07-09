@@ -18,4 +18,3 @@ supervisely_integration/demo/model
 data
 predictions
 47698_YOLO/
-supervisely.env
