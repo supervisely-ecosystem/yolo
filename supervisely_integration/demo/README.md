@@ -30,7 +30,7 @@ docker pull supervisely/yolo:1.0.6-deploy
 
 See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/master/docker/Dockerfile) for more details.
 
-Docker image already includes the source code. Clone the repository inside the container:
+Docker image already includes the source code.
 
 ### 2. Download checkpoint and model files from Supervisely Platform
 
