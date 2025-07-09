@@ -1,4 +1,5 @@
 /my_model
+venv/
 .venv/
 *.pyc
 .DS_Store
@@ -16,4 +17,5 @@ supervisely_integration/demo/model
 # debug
 data
 predictions
+47698_YOLO/
 supervisely.env

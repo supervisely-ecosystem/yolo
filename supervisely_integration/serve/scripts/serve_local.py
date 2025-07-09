@@ -22,16 +22,29 @@ api = sly.Api.from_env()
 # 2. Run with docker run       #
 ################################
 # Run the following command in the terminal:
+# Pretrained
+# docker run \
+#   --shm-size=1g \
+#   --runtime=nvidia \
+#   --env PYTHONPATH=/app \
+#   -p 8000:8000 \
+#   supervisely/yolo:dev-deploy \
+#   deploy
+#   --model "YOLO11n-det"
+
+# Custom
 # docker run \
 #   --shm-size=1g \
 #   --runtime=nvidia \
 #   --env-file ~/supervisely.env \
 #   --env PYTHONPATH=/app \
-#   -v ".:/app" \
-#   -w /app \
+#   -v "./47653_YOLO:/model" \
 #   -p 8000:8000 \
-#   supervisely/yolo:1.0.5 \
-#   python3 supervisely_integration/serve/main.py deploy
+#   supervisely/yolo:dev-deploy \
+#   deploy \
+#   --model "/model/checkpoints/best.pt" \
+#   --device "cuda:0"
+
 
 
 ################################
