@@ -185,7 +185,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                 )
                 self.gui.download_progress.show()
             model = YOLO(weights_path)
-            model.export(format=format, device=self.model.device, **kwargs)
+            model.export(format=format, device=self.device, **kwargs)
             if self.gui is not None:
                 bar.update(1)
                 self.gui.download_progress.hide()
