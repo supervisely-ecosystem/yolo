@@ -1,0 +1,8 @@
+FROM supervisely/yolo:1.0.6
+
+WORKDIR /app
+COPY . /app
+
+ENV PYTHONPATH=/app
+
+ENTRYPOINT ["python3", "-m", "supervisely_integration.serve.main"]
