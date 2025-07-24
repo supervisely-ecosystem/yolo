@@ -152,7 +152,7 @@ pip install -r requirements.txt
 We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/yolo/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
 
 ```bash
-docker pull supervisely/yolo:1.0.6-deploy
+docker pull supervisely/yolo:1.0.8-deploy
 ```
 
 See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/master/docker/Dockerfile) for more details.
