@@ -6,7 +6,7 @@ from ultralytics.utils import SettingsManager
 
 from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
-from supervisely.nn import ModelSource, TaskType
+from supervisely.nn import ModelSource
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
 from supervisely_integration.train.trainer import Trainer
