@@ -17,7 +17,7 @@
 		"framework:YOLO"
 	],
 	"task_location": "workspace_tasks",
-	"docker_image": "supervisely/yolo:1.0.6",
+	"docker_image": "supervisely/yolo:1.0.7",
 	"community_agent": false,
 	"need_gpu": true,
 	"gpu": "required",
