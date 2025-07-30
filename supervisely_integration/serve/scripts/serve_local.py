@@ -28,7 +28,7 @@ api = sly.Api.from_env()
 #   --runtime=nvidia \
 #   --env PYTHONPATH=/app \
 #   -p 8000:8000 \
-#   supervisely/yolo:1.0.8-deploy \
+#   supervisely/yolo:1.0.9-deploy \
 #   deploy
 #   --model "YOLO11n-det"
 
@@ -40,7 +40,7 @@ api = sly.Api.from_env()
 #   --env PYTHONPATH=/app \
 #   -v "./47653_YOLO:/model" \
 #   -p 8000:8000 \
-#   supervisely/yolo:1.0.8-deploy \
+#   supervisely/yolo:1.0.9-deploy \
 #   deploy \
 #   --model "/model/checkpoints/best.pt" \
 #   --device "cuda:0"
