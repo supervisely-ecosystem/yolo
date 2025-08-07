@@ -34,22 +34,13 @@
 	"entrypoint": "python3 -m uvicorn main:train.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/train",
 	"port": 8000,
 	"framework": {
-		"name": "YOLO v8-v12",
-		"conference": null,
-		"released": 2025,
-		"tasks": {
-			"object detection": {
-				"metric": 55.2,
-				"models": 37
-			},
-			"instance segmentation": {
-				"metric": 43.8,
-				"models": 12
-			}
-		},
-		"real_time": true,
-		"onnx": true,
-		"tensorrt": true
+	    "name": "YOLO",
+	    "tags": ["Real-Time"],
+	    "export": ["ONNX", "TensorRT"],
+	    "conference": null,
+	    "released": "2025",
+	    "description": "Collection of constantly evolving YOLO models maintained by Ultralytics. Well-known as real-time object detection models with ease of use.",
+	    "github": "https://github.com/ultralytics/ultralytics"
 	},
 	"files": {
 		"models": "supervisely_integration/models.json",
