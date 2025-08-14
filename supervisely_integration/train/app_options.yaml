@@ -60,3 +60,8 @@ export_tensorrt_supported: true
 demo:
   branch: "main"
   path: "supervisely_integration/demo"
+
+# ==================== Acknowledgment ======================
+original_repository:
+  name: "ultralytics"
+  url: "https://github.com/ultralytics/ultralytics"

@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 import supervisely as sly
 from supervisely.template.experiment.experiment_generator import ExperimentGenerator
-from supervisely_integration.serve.main import YOLOModel
+from supervisely_integration.serve.serve_yolo import YOLOModel
+
 
 if sly.is_development():
     load_dotenv("local.env")
@@ -280,6 +281,10 @@ app_options = {
     "demo": {
         "path": "supervisely_integration/demo",
     },
+	"original_repository": {
+		"name": "ultralytics",
+		"url": "https://github.com/ultralytics/ultralytics"
+	}
 }
 
 
