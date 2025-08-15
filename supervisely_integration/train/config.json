@@ -39,7 +39,7 @@
 	    "export": ["ONNX", "TensorRT"],
 	    "conference": null,
 	    "released": "2025",
-	    "description": "Collection of constantly evolving YOLO models maintained by Ultralytics. Well-known as real-time object detection models with ease of use.",
+	    "description": "Collection of constantly evolving YOLO models maintained by Ultralytics. Well-known for their real-time performance in detection tasks.",
 	    "github": "https://github.com/ultralytics/ultralytics"
 	},
 	"files": {
