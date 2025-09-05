@@ -119,3 +119,6 @@ def export_checkpoint(checkpoint_path: str, format: str, fp16=False, dynamic=Fal
                 exported_checkpoint_path.replace(".engine", ".onnx"),
             )
     return exported_checkpoint_path
+
+if train.auto_start:
+    train.start_in_thread()
