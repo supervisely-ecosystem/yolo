@@ -34,15 +34,86 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         if runtime == RuntimeType.PYTORCH:
             self.model = self._load_pytorch(checkpoint_path)
         elif runtime == RuntimeType.ONNXRUNTIME:
-            self._check_onnx_device(device)
-            self.model = self._load_onnx(checkpoint_path)
+            self.model = self._load_onnx(checkpoint_path, device)
         elif runtime == RuntimeType.TENSORRT:
-            self._check_tensorrt_device(device)
-            self.model = self._load_tensorrt(checkpoint_path)
+            self.model = self._load_tensorrt(checkpoint_path, device)
             self.max_batch_size = 1
 
         self.classes = list(self.model.names.values())
         self._load_model_meta()
+
+    def get_info(self):
+        info = super().get_info()
+        info["task type"] = self.task_type
+        info["videos_support"] = True
+        info["async_video_inference_support"] = True
+        info["tracking_on_videos_support"] = True
+        return info
+
+    # Loaders --------------- #
+    def _load_pytorch(self, checkpoint_path: str):
+        model = YOLO(checkpoint_path)
+        model.to(self.device)
+        return model
+
+    def _load_onnx(self, checkpoint_path: str, device: str):
+        self._check_onnx_device(device)
+        model = YOLO(checkpoint_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
+        return model
+
+    def _load_tensorrt(self, checkpoint_path: str, device: str):
+        self._check_tensorrt_device(device)
+        model = YOLO(checkpoint_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
+        return model
+    # -------------------------- #
+
+    # Predictions ----------- #
+    def predict_video(self, video_path: str, settings: Dict[str, Any], stop: Event) -> Generator:
+        retina_masks = self.task_type == TaskType.INSTANCE_SEGMENTATION
+        predictions_generator = self.model(
+            source=video_path,
+            stream=True,
+            conf=settings["conf"],
+            iou=settings["iou"],
+            half=settings["half"],
+            device=self.model.device,
+            max_det=settings["max_det"],
+            agnostic_nms=settings["agnostic_nms"],
+            retina_masks=retina_masks,
+        )
+        for prediction in predictions_generator:
+            if stop.is_set():
+                predictions_generator.close()
+                return
+            yield self._to_dto(prediction, settings)
+
+    def predict_benchmark(self, images_np: List[np.ndarray], settings: Dict):
+        # RGB to BGR
+        images_np = [cv2.cvtColor(img, cv2.COLOR_RGB2BGR) for img in images_np]
+        retina_masks = self.task_type == TaskType.INSTANCE_SEGMENTATION
+        predictions = self.model(
+            source=images_np,
+            conf=settings["conf"],
+            iou=settings["iou"],
+            half=settings["half"],
+            device=self.model.device,
+            max_det=settings["max_det"],
+            agnostic_nms=settings["agnostic_nms"],
+            retina_masks=retina_masks,
+        )
+        n = len(predictions)
+        first_benchmark = predictions[0].speed
+        # YOLO returns avg time per image, so we need to multiply it by the number of images
+        benchmark = {
+            "preprocess": first_benchmark["preprocess"] * n,
+            "inference": first_benchmark["inference"] * n,
+            "postprocess": first_benchmark["postprocess"] * n,
+        }
+        with sly.nn.inference.Timer() as timer:
+            predictions = [self._to_dto(prediction, settings) for prediction in predictions]
+        to_dto_time = timer.get_time()
+        benchmark["postprocess"] += to_dto_time
+        return predictions, benchmark
 
     def _create_label(self, dto: Union[PredictionMask, PredictionBBox]):
         if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
@@ -102,53 +173,34 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                     class_name = self.classes[cls_index]
                     dtos.append(PredictionMask(class_name, mask, confidence))
         return dtos
+    # -------------------------- #
 
-    def predict_video(self, video_path: str, settings: Dict[str, Any], stop: Event) -> Generator:
-        retina_masks = self.task_type == TaskType.INSTANCE_SEGMENTATION
-        predictions_generator = self.model(
-            source=video_path,
-            stream=True,
-            conf=settings["conf"],
-            iou=settings["iou"],
-            half=settings["half"],
-            device=self.model.device,
-            max_det=settings["max_det"],
-            agnostic_nms=settings["agnostic_nms"],
-            retina_masks=retina_masks,
-        )
-        for prediction in predictions_generator:
-            if stop.is_set():
-                predictions_generator.close()
-                return
-            yield self._to_dto(prediction, settings)
+    # Converters --------------- #
+    def export_onnx(self, deploy_params: dict) -> dict:
+        # @TODO: check how checkpoint_path is changed
+        checkpoint_path = deploy_params["model_files"]["checkpoint"]
+        model = YOLO(checkpoint_path)
+        model.export(format="onnx", device=self.device, dynamic=True)
+        return checkpoint_path
 
-    def predict_benchmark(self, images_np: List[np.ndarray], settings: Dict):
-        # RGB to BGR
-        images_np = [cv2.cvtColor(img, cv2.COLOR_RGB2BGR) for img in images_np]
-        retina_masks = self.task_type == TaskType.INSTANCE_SEGMENTATION
-        predictions = self.model(
-            source=images_np,
-            conf=settings["conf"],
-            iou=settings["iou"],
-            half=settings["half"],
-            device=self.model.device,
-            max_det=settings["max_det"],
-            agnostic_nms=settings["agnostic_nms"],
-            retina_masks=retina_masks,
-        )
-        n = len(predictions)
-        first_benchmark = predictions[0].speed
-        # YOLO returns avg time per image, so we need to multiply it by the number of images
-        benchmark = {
-            "preprocess": first_benchmark["preprocess"] * n,
-            "inference": first_benchmark["inference"] * n,
-            "postprocess": first_benchmark["postprocess"] * n,
-        }
-        with sly.nn.inference.Timer() as timer:
-            predictions = [self._to_dto(prediction, settings) for prediction in predictions]
-        to_dto_time = timer.get_time()
-        benchmark["postprocess"] += to_dto_time
-        return predictions, benchmark
+    def export_tensorrt(self, deploy_params: dict) -> dict:
+        # @TODO: check how checkpoint_path is changed
+        checkpoint_path = deploy_params["model_files"]["checkpoint"]
+        model = YOLO(checkpoint_path)
+        model.export(format="engine", device=self.device, dynamic=False)
+        return checkpoint_path
+    # -------------------------- #
+
+    # Utils -------------------- #
+    def _load_model_meta(self):
+        self.class_names = list(self.model.names.values())
+        if self.task_type == TaskType.OBJECT_DETECTION:
+            obj_classes = [sly.ObjClass(name, sly.Rectangle) for name in self.class_names]
+        elif self.task_type == TaskType.INSTANCE_SEGMENTATION:
+            self.general_class_names = list(self.model.names.values())
+            obj_classes = [sly.ObjClass(name, sly.Bitmap) for name in self.class_names]
+        self._model_meta = sly.ProjectMeta(obj_classes=sly.ObjClassCollection(obj_classes))
+        self._get_confidence_tag_meta()
 
     def _check_onnx_device(self, device: str):
         import onnxruntime as ort
@@ -164,57 +216,4 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
     def _check_tensorrt_device(self, device: str):
         if "cuda" not in device:
             raise ValueError(f"Selected '{device}' device, but TensorRT only supports CUDA devices")
-
-    def _load_pytorch(self, weights_path: str):
-        model = YOLO(weights_path)
-        model.to(self.device)
-        return model
-
-    def _load_onnx(self, weights_path: str):
-        return self._load_runtime(weights_path, "onnx", dynamic=True)
-
-    def _load_tensorrt(self, weights_path: str):
-        return self._load_runtime(weights_path, "engine", dynamic=False)
-
-    def _load_runtime(self, weights_path: str, format: str, **kwargs):
-        def export_model():
-            sly.logger.info(f"Exporting model to '{format}' format...")
-            if self.gui is not None:
-                bar = self.gui.download_progress(
-                    message=f"Exporting model to '{format}' format...", total=1
-                )
-                self.gui.download_progress.show()
-            model = YOLO(weights_path)
-            model.export(format=format, device=self.device, **kwargs)
-            if self.gui is not None:
-                bar.update(1)
-                self.gui.download_progress.hide()
-
-        if weights_path.endswith(".pt"):
-            exported_weights_path = weights_path.replace(".pt", f".{format}")
-            file_name = sly.fs.get_file_name(weights_path)
-            if file_name == "best" or not os.path.exists(exported_weights_path):
-                export_model()
-        else:
-            exported_weights_path = weights_path
-
-        model = YOLO(exported_weights_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
-        return model
-
-    def _load_model_meta(self):
-        self.class_names = list(self.model.names.values())
-        if self.task_type == TaskType.OBJECT_DETECTION:
-            obj_classes = [sly.ObjClass(name, sly.Rectangle) for name in self.class_names]
-        elif self.task_type == TaskType.INSTANCE_SEGMENTATION:
-            self.general_class_names = list(self.model.names.values())
-            obj_classes = [sly.ObjClass(name, sly.Bitmap) for name in self.class_names]
-        self._model_meta = sly.ProjectMeta(obj_classes=sly.ObjClassCollection(obj_classes))
-        self._get_confidence_tag_meta()
-
-    def get_info(self):
-        info = super().get_info()
-        info["task type"] = self.task_type
-        info["videos_support"] = True
-        info["async_video_inference_support"] = True
-        info["tracking_on_videos_support"] = True
-        return info
+    # -------------------------- #
