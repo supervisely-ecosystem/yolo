@@ -18,7 +18,7 @@
 	],
 	"task_location": "application_sessions",
 	"docker_image": "supervisely/yolo:1.0.15",
-	"cuda_version": "12.8",
+	"cuda_version": 12.8,
 	"community_agent": false,
 	"need_gpu": false,
 	"gpu": "preferred",
