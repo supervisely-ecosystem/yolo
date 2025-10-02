@@ -27,6 +27,9 @@
 		"sly_video_tracking",
 		"scalable"
 	],
+	"allowed_shapes": [
+		"rectangle"
+	],
 	"license": {
 		"type": "AGPL-3.0"
 	},
