@@ -22,7 +22,9 @@
 	"need_gpu": false,
 	"gpu": "preferred",
 	"session_tags": [
-		"deployed_nn"
+		"deployed_nn",
+		"sly_video_tracking",
+		"scalable"
 	],
 	"license": {
 		"type": "AGPL-3.0"
