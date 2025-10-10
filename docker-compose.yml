@@ -1,6 +1,6 @@
 services:
   yolo:
-    image: supervisely/yolo:1.0.17-deploy
+    image: supervisely/yolo:1.0.18-deploy
     shm_size: 1g
     runtime: nvidia
     env_file:
