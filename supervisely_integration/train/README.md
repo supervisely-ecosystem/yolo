@@ -12,7 +12,7 @@
   <a href="#Acknowledgment">Acknowledgment</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](../../../../../../supervisely-ecosystem/yolo/supervisely_integration/train)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/supervisely-ecosystem/yolo/supervisely_integration/train)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/yolo)
 [![views](https://app.supervisely.com/img/badges/views/supervisely-ecosystem/yolo/supervisely_integration/train.png)](https://supervisely.com)
@@ -22,7 +22,7 @@
 
 # Overview
 
-This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection and instance segmentation. Support for pose estimation will be added in the upcoming releases, meanwhile you can use [Train YOLOv8](../../../../../supervisely-ecosystem/yolov8/train) app for pose estimation.
+This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection and instance segmentation. Support for pose estimation will be added in the upcoming releases, meanwhile you can use [Train YOLOv8](https://ecosystem.supervisely.com/apps/yolov8/train) app for pose estimation.
 
 **Object Detection models**
 
