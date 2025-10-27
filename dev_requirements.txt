@@ -1,5 +1,4 @@
-git+https://github.com/supervisely/supervisely.git@tracking-by-detection-auto-track-oleg
-
+git+https://github.com/supervisely/supervisely.git@tracker-improvements2
 supervisely[training]==6.73.436
 supervisely[model-benchmark]==6.73.436
 torch==2.6.0
