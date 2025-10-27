@@ -23,7 +23,8 @@
     "need_gpu": false,
     "gpu": "preferred",
     "session_tags": [
-        "deployed_nn"
+        "deployed_nn",
+        "sly_video_tracking_by_detection"
     ],
     "license": {
         "type": "AGPL-3.0"
