@@ -1,4 +1,4 @@
-git+https://github.com/supervisely/supervisely.git@tracker-improvements2
+git+https://github.com/supervisely/supervisely.git@tracking-labeling-tool
 supervisely[training]==6.73.436
 supervisely[model-benchmark]==6.73.436
 torch==2.6.0
