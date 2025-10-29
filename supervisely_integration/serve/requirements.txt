@@ -1,1 +1,1 @@
-git+https://github.com/supervisely/supervisely.git@tracking-by-detection-niko#egg=supervisely[tracking]
+git+https://github.com/supervisely/supervisely.git@tracking-by-detection-oleg#egg=supervisely[tracking]
