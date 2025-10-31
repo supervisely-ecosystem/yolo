@@ -1,1 +1,0 @@
-supervisely[training]==6.73.465
