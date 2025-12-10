@@ -17,7 +17,7 @@
         "framework:YOLO"
     ],
     "task_location": "application_sessions",
-    "docker_image": "supervisely/yolo:1.0.22",
+    "docker_image": "supervisely/yolo:1.0.23",
     "cuda_version": 12.8,
     "community_agent": false,
     "need_gpu": false,
@@ -29,7 +29,7 @@
     "license": {
         "type": "AGPL-3.0"
     },
-    "instance_version": "6.15.5",
+    "instance_version": "6.15.35",
     "entrypoint": "python3 -m uvicorn main:model.app --host 0.0.0.0 --port 8000 --ws websockets --app-dir supervisely_integration/serve",
     "port": 8000,
     "files": {
