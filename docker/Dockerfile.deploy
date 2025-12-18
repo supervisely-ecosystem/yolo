@@ -1,5 +1,7 @@
 FROM supervisely/yolo:1.0.24
 
+RUN pip install --no-cache-dir git+https://github.com/supervisely/supervisely.git@local-deploy
+
 WORKDIR /app
 COPY . /app
 

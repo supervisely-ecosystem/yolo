@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import supervisely as sly
+from supervisely.nn.model.model_api import ModelAPI
 from dotenv import load_dotenv
 
 if sly.is_development():
@@ -9,6 +10,19 @@ if sly.is_development():
     load_dotenv(os.path.expanduser("~/supervisely.env"))
 
 api = sly.Api.from_env()
+
+cwd = Path(__file__).parent
+
+# LOCAL DATA:
+model = ModelAPI(url="http://0.0.0.0:8000")  # without API
+prediction = model.predict(cwd / "coco_sample.jpg")[0]  # Image path
+
+# USING REMOTE DATA VIA API:
+# model = ModelAPI(api=api, url="http://0.0.0.0:8000")
+prediction = model.predict(image_id=4808207)[0]  # Image ID
+
+prediction.visualize(cwd / "prediction_result.jpg")
+
 
 ################################
 # 1. Serve with docker-compose #
@@ -51,25 +65,3 @@ api = sly.Api.from_env()
 # Run the following command in the terminal:
 # PYTHONPATH="${PWD}:${PYTHONPATH}" \
 # python ./supervisely_integration/serve/main.py deploy \
-
-###################################
-# How to use the inference session: #
-###################################
-
-# Connect to the inference session
-cwd = Path(__file__).parent
-
-
-# USING REMOTE DATA VIA API:
-session = sly.nn.inference.Session(api, session_url="http://0.0.0.0:8000")
-ann = session.inference_image_id(4808207)
-
-# LOCAL DATA:
-# session = sly.nn.inference.Session(session_url="http://0.0.0.0:8000")
-img_path = cwd / "coco_sample.jpg"
-# ann = session.inference_image_path(str(img_path))
-
-# Read the image and draw the annotation
-img = sly.image.read(str(img_path))
-ann.draw_pretty(img)
-sly.image.write(str(cwd / "coco_sample_ann_preview.jpg"), img)

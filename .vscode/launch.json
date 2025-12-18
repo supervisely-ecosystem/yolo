@@ -73,6 +73,12 @@
 				"TEAM_ID": "4",
 			}
 		},
+        {
+			"name": "Local Deploy (Docker)",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "docker run --shm-size=1g --runtime=nvidia --env PYTHONPATH=/app -p 8000:8000 supervisely/yolo:1.0.24-deploy-test deploy --model \"YOLO11n-det\""
+		},
 		{
 			"name": "Python: Current File",
 			"type": "debugpy",
