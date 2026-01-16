@@ -55,4 +55,4 @@ RUN pip install --no-cache-dir supervisely[training]==6.73.503
 RUN pip install --no-cache-dir supervisely[tracking]==6.73.503
 RUN pip install --no-cache-dir supervisely[model-benchmark]==6.73.503
 
-LABEL python_sdk_version=6.73.503
+LABEL python_sdk_version="6.73.503"
