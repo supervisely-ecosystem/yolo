@@ -1,5 +1,140 @@
 [
     {
+        "model_name": "YOLO26n-det",
+        "Size (pixels)": "640",
+        "mAP": "40.9",
+        "params (M)": "2.4",
+        "FLOPs (B)": "5.4",
+        "meta": {
+            "task_type": "object detection",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26s-det",
+        "Size (pixels)": "640",
+        "mAP": "48.6",
+        "params (M)": "9.5",
+        "FLOPs (B)": "20.7",
+        "meta": {
+            "task_type": "object detection",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26m-det",
+        "Size (pixels)": "640",
+        "mAP": "53.1",
+        "params (M)": "20.4",
+        "FLOPs (B)": "68.2",
+        "meta": {
+            "task_type": "object detection",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26l-det",
+        "Size (pixels)": "640",
+        "mAP": "55.0",
+        "params (M)": "24.8",
+        "FLOPs (B)": "86.4",
+        "meta": {
+            "task_type": "object detection",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26x-det",
+        "Size (pixels)": "640",
+        "mAP": "57.5",
+        "params (M)": "55.7",
+        "FLOPs (B)": "193.9",
+        "meta": {
+            "task_type": "object detection",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26n-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "39.6",
+        "mAP (mask)": "33.9",
+        "params (M)": "2.7",
+        "FLOPs (B)": "9.1",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-seg.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26s-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "47.3",
+        "mAP (mask)": "40.0",
+        "params (M)": "10.4",
+        "FLOPs (B)": "34.2",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26m-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "52.5",
+        "mAP (mask)": "44.1",
+        "params (M)": "23.6",
+        "FLOPs (B)": "121.5",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-seg.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26l-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "54.4",
+        "mAP (mask)": "45.5",
+        "params (M)": "28.0",
+        "FLOPs (B)": "139.8",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-seg.pt"
+            }
+        }
+    },
+    {
+        "model_name": "YOLO26x-seg",
+        "Size (pixels)": "640",
+        "mAP (box)": "56.5",
+        "mAP (mask)": "47.0",
+        "params (M)": "62.8",
+        "FLOPs (B)": "313.5",
+        "meta": {
+            "task_type": "instance segmentation",
+            "model_files": {
+                "checkpoint": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-seg.pt"
+            }
+        }
+    },
+    {
         "model_name": "YOLO12n",
         "Size (pixels)": "640",
         "mAP": "40.6",

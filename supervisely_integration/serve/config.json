@@ -1,7 +1,7 @@
 {
     "type": "app",
     "version": "2.0.0",
-    "name": "Serve YOLO v8 - v12",
+    "name": "Serve YOLO v8 - 26",
     "description": "Deploy YOLO models as a REST API service",
     "poster": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_serve_yolo.jpg",
     "icon": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/icon_yolo_api_serve.jpg",
@@ -17,7 +17,7 @@
         "framework:YOLO"
     ],
     "task_location": "application_sessions",
-    "docker_image": "supervisely/yolo:1.0.24",
+    "docker_image": "supervisely/yolo:1.0.27",
     "cuda_version": 12.8,
     "community_agent": false,
     "need_gpu": false,

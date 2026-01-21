@@ -1,15 +1,23 @@
 from os import getcwd, rename
-from os.path import join
+from os.path import join, expanduser
 
 from ultralytics import YOLO
 from ultralytics.utils import SettingsManager
 
+import supervisely as sly
 from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
 from supervisely_integration.train.trainer import Trainer
+from dotenv import load_dotenv
+
+
+if sly.is_development():
+    load_dotenv("local.env")
+    load_dotenv(expanduser("~/supervisely.env"))
+
 
 base_path = "supervisely_integration/train"
 train = TrainApp(
@@ -21,6 +29,7 @@ train = TrainApp(
 
 inference_settings = "supervisely_integration/serve/inference_settings.yaml"
 train.register_inference_class(YOLOModel, inference_settings)
+train.gui.model_selector.pretrained_models_table.set_active_row(1)
 
 
 @train.start
@@ -119,6 +128,7 @@ def export_checkpoint(checkpoint_path: str, format: str, fp16=False, dynamic=Fal
                 exported_checkpoint_path.replace(".engine", ".onnx"),
             )
     return exported_checkpoint_path
+
 
 if train.auto_start:
     train.start_in_thread()

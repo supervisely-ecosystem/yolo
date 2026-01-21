@@ -44,9 +44,9 @@ RUN TRT_VERSION="10.9.0.34-1+cuda12.8" && apt-get update && apt-get install -y \
 
 # Install Dependencies
 RUN pip install --no-cache-dir torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
-RUN pip install --no-cache-dir onnx==1.16.1 onnxruntime-gpu==1.19.2
+RUN pip install --no-cache-dir onnx==1.16.1 onnxruntime-gpu==1.19.2 onnxslim==0.1.82
 RUN pip install --no-cache-dir tensorrt-cu12==10.9.0.34
-RUN pip install --no-cache-dir ultralytics==8.3.83
+RUN pip install --no-cache-dir ultralytics==8.4.6
 
 RUN pip install --no-cache-dir setuptools==69.5.1 tensorboard imgaug==0.4.0
 RUN pip install --no-cache-dir transformers==4.50.3 calflops==0.3.2 scipy==1.15.2 faster-coco-eval==1.6.5
