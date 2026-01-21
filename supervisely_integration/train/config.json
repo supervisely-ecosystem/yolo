@@ -1,7 +1,7 @@
 {
     "type": "app",
     "version": "2.0.0",
-    "name": "Train YOLO v8 - v12",
+    "name": "Train YOLO v8 - 26",
     "description": "Train YOLO models on your data",
     "poster": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_train_yolo.jpg",
     "icon": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/icon_yolo_train.jpg",
@@ -17,7 +17,7 @@
         "framework:YOLO"
     ],
     "task_location": "workspace_tasks",
-    "docker_image": "supervisely/yolo:1.0.26",
+    "docker_image": "supervisely/yolo:1.0.27",
     "cuda_version": 12.8,
     "community_agent": false,
     "need_gpu": true,
