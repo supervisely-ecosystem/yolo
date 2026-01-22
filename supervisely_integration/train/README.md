@@ -1,6 +1,6 @@
 <div align="center" markdown>
 
-<img src="https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_train_yolo.jpg"/>
+<img src="https://github.com/user-attachments/assets/9999d236-387b-4a6c-b6a0-0ff77ccba315"/>
 
 # Train YOLO
 

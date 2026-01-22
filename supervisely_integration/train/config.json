@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "name": "Train YOLO v8 - 26",
     "description": "Train YOLO models on your data",
-    "poster": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/poster_train_yolo.jpg",
+    "poster": "https://github.com/user-attachments/assets/9999d236-387b-4a6c-b6a0-0ff77ccba315",
     "icon": "https://github.com/supervisely-ecosystem/yolo/releases/download/v1.0.3/icon_yolo_train.jpg",
     "icon_cover": true,
     "categories": [
