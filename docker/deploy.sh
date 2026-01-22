@@ -4,7 +4,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
 docker build --no-cache \
   -f "${SCRIPT_DIR}/Dockerfile.deploy" \
-  -t supervisely/yolo:1.0.24-deploy \
+  -t supervisely/yolo:1.0.28-deploy \
   "$PROJECT_ROOT"
 
-docker push supervisely/yolo:1.0.24-deploy
+docker push supervisely/yolo:1.0.28-deploy
