@@ -3,6 +3,9 @@ from os.path import join, expanduser
 
 from ultralytics import YOLO
 from ultralytics.utils import SettingsManager
+from ultralytics import settings
+
+settings.update({"tensorboard": True})
 
 import supervisely as sly
 from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
