@@ -26,7 +26,8 @@
         "target": [
             "images_project"
         ],
-        "context_root": "Neural Networks"
+        "context_root": "Neural Networks",
+        "context_category": "YOLO"
     },
     "license": {
         "type": "AGPL-3.0"
