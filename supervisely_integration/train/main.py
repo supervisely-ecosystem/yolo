@@ -32,7 +32,6 @@ train = TrainApp(
 
 inference_settings = "supervisely_integration/serve/inference_settings.yaml"
 train.register_inference_class(YOLOModel, inference_settings)
-train.gui.model_selector.pretrained_models_table.set_active_row(1)
 
 
 @train.start
