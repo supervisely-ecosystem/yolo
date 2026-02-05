@@ -29,7 +29,7 @@ train_val_splits_selector:
 generate_report: true
 
 # Add selector for selecting cuda device
-device_selector: false
+device_selector: true
 
 # Add options to run model benchmark after training
 model_benchmark: true
@@ -39,6 +39,9 @@ show_logs_in_gui: true
 
 # [Beta] Collapse GUI cards on selection
 collapsable: false
+
+# Multi-GPU training support
+multi_gpu: true
 
 # ==================== Export ======================
 # Requires additional implementation

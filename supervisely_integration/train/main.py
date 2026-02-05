@@ -105,7 +105,7 @@ def prepare_train_config(data_config_path):
             "mode": "train",
             "model": checkpoint_path,
             "data": data_config_path,
-            "device": train.device,
+            "device": train.devices,
             "project": join(getcwd(), train.output_dir),
             "name": "ultralytics",
             "cache": False,
