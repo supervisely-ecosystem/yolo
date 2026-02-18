@@ -8,6 +8,7 @@
   <a href="#Overview">Overview</a> •
   <a href="#How-To-Run">How To Run</a> •
   <a href="#how-to-use-your-checkpoints-outside-supervisely-platform">How to use checkpoints outside Supervisely Platform</a> •
+  <a href="#how-to-use-external-checkpoints-inside-supervisely-platform">How to use external checkpoints inside Supervisely Platform</a> •
   <a href="#Acknowledgment">Acknowledgment</a>
 </p>
 
@@ -167,7 +168,7 @@ External checkpoints are checkpoints that were trained outside of Supervisely Pl
 ![external-models](https://github.com/user-attachments/assets/00f09c8d-8cbc-4fea-8828-afb651f469cc)
 
 1. Select External Models Tab
-2. Provide path to checkpoint. It must be a path to a file in Supervisely Team Files.
+2. Select model task type and provide path to checkpoint. It must be a path to a file in Supervisely Team Files.
 3. Select device and press the `Serve` button, then wait for the model to deploy.
 4. You can now use the model for inference and see model info.
 
