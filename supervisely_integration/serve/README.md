@@ -8,6 +8,7 @@
   <a href="#Overview">Overview</a> •
   <a href="#How-To-Run">How To Run</a> •
   <a href="#how-to-use-your-checkpoints-outside-supervisely-platform">How to use checkpoints outside Supervisely Platform</a> •
+  <a href="#how-to-use-external-checkpoints-inside-supervisely-platform">How to use external checkpoints inside Supervisely Platform</a> •
   <a href="#Acknowledgment">Acknowledgment</a>
 </p>
 
@@ -134,7 +135,7 @@ pip install -r requirements.txt
 We provide a pre-built docker image with all dependencies installed [DockerHub](https://hub.docker.com/r/supervisely/yolo/tags). The image includes installed packages for ONNXRuntime and TensorRT inference.
 
 ```bash
-docker pull supervisely/yolo:1.0.29-deploy
+docker pull supervisely/yolo:1.0.31-deploy
 ```
 
 See our [Dockerfile](https://github.com/supervisely-ecosystem/yolo/blob/master/docker/Dockerfile) for more details.
@@ -159,6 +160,17 @@ We provide several demo scripts to run inference with your checkpoint:
 - [demo_pytorch.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_pytorch.py) - simple PyTorch inference
 - [demo_onnx.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_onnx.py) - ONNXRuntime inference
 - [demo_tensorrt.py](https://github.com/supervisely-ecosystem/yolo/blob/master/supervisely_integration/demo/demo_tensorrt.py) - TensorRT inference
+
+# How to use external checkpoints inside Supervisely Platform
+
+External checkpoints are checkpoints that were trained outside of Supervisely Platform.
+
+![external-models](https://github.com/user-attachments/assets/00f09c8d-8cbc-4fea-8828-afb651f469cc)
+
+1. Select External Models Tab
+2. Select model task type and provide path to checkpoint. It must be a path to a file in Supervisely Team Files.
+3. Select device and press the `Serve` button, then wait for the model to deploy.
+4. You can now use the model for inference and see model info.
 
 # Acknowledgment
 

@@ -39,6 +39,15 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             self.model = self._load_tensorrt(checkpoint_path, device)
             self.max_batch_size = 1
 
+        if self.model.task == "detect" and self.task_type == TaskType.INSTANCE_SEGMENTATION:
+            raise ValueError(
+                f"YOLO model is not supported for instance segmentation task. Model task type is {TaskType.OBJECT_DETECTION}, but selected task type is {TaskType.INSTANCE_SEGMENTATION}"
+            )
+        elif self.model.task == "segment" and self.task_type == TaskType.OBJECT_DETECTION:
+            raise ValueError(
+                f"YOLO model is not supported for object detection task. Model task type is {TaskType.INSTANCE_SEGMENTATION}, but selected task type is {TaskType.OBJECT_DETECTION}"
+            )
+
         self.classes = list(self.model.names.values())
         self._load_model_meta()
 
@@ -65,6 +74,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         self._check_tensorrt_device(device)
         model = YOLO(checkpoint_path, task=SLY_YOLO_TASK_TYPE_MAP[self.task_type])
         return model
+
     # -------------------------- #
 
     # Predictions ----------- #
@@ -173,6 +183,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                     class_name = self.classes[cls_index]
                     dtos.append(PredictionMask(class_name, mask, confidence))
         return dtos
+
     # -------------------------- #
 
     # Converters --------------- #
@@ -189,6 +200,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         model = YOLO(checkpoint_path)
         model.export(format="engine", device=self.device, dynamic=False)
         return checkpoint_path
+
     # -------------------------- #
 
     # Utils -------------------- #
@@ -216,4 +228,5 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
     def _check_tensorrt_device(self, device: str):
         if "cuda" not in device:
             raise ValueError(f"Selected '{device}' device, but TensorRT only supports CUDA devices")
+
     # -------------------------- #
