@@ -1,5 +1,4 @@
 supervisely[training]==6.73.567
-supervisely[tracking]==6.73.567
 supervisely[model-benchmark]==6.73.567
 
 --extra-index-url https://download.pytorch.org/whl/cu128
