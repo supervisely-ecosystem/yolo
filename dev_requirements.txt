@@ -1,13 +1,13 @@
-# git+https://github.com/supervisely/supervisely.git@test-sdk-branch
+supervisely[training]==6.73.567
+supervisely[tracking]==6.73.567
+supervisely[model-benchmark]==6.73.567
 
-supervisely[training]==6.73.532
-supervisely[tracking]==6.73.532
-supervisely[model-benchmark]==6.73.532
-
-torch==2.7.1
-torchvision==0.22.1
-onnx==1.16.1
-onnxruntime-gpu==1.19.2
-tensorrt-cu12==10.13.2.6
-tensorboard==2.19.0
-ultralytics==8.3.88
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+onnx==1.21.0
+onnxruntime-gpu==1.26.0
+onnxslim==0.1.82
+tensorrt-cu12==10.16.1.11
+tensorboard==2.20.0
+ultralytics==8.4.6
