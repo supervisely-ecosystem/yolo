@@ -2,7 +2,7 @@
 
 <img src="https://github.com/user-attachments/assets/9999d236-387b-4a6c-b6a0-0ff77ccba315"/>
 
-# Train YOLO
+# Train YOLO 🐕
 
 <p align="center">
   <a href="#Overview">Overview</a> •
