@@ -51,8 +51,8 @@ RUN pip install --no-cache-dir ultralytics==8.4.6
 RUN pip install --no-cache-dir setuptools==69.5.1 tensorboard imgaug==0.4.0
 RUN pip install --no-cache-dir transformers==4.50.3 calflops==0.3.2 scipy==1.15.2 faster-coco-eval==1.6.5
 
-RUN pip install --no-cache-dir supervisely[training]==6.74.25
-RUN pip install --no-cache-dir supervisely[tracking]==6.74.25
-RUN pip install --no-cache-dir supervisely[model-benchmark]==6.74.25
+RUN pip install --no-cache-dir supervisely[training]==6.74.26
+RUN pip install --no-cache-dir supervisely[tracking]==6.74.26
+RUN pip install --no-cache-dir supervisely[model-benchmark]==6.74.26
 
-LABEL python_sdk_version="6.74.25"
+LABEL python_sdk_version="6.74.26"
