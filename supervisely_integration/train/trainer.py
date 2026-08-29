@@ -42,3 +42,4 @@ class Trainer:
     def train(self):
         """Start the training process using the provided configuration."""
         self.model.train(**self.train_config)
+        return self.model.trainer.save_dir
