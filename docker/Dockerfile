@@ -51,6 +51,6 @@ RUN pip install --no-cache-dir ultralytics==8.4.6
 RUN pip install --no-cache-dir setuptools==69.5.1 tensorboard imgaug==0.4.0
 RUN pip install --no-cache-dir transformers==4.50.3 calflops==0.3.2 scipy==1.15.2 faster-coco-eval==1.6.5
 
-RUN pip install --no-cache-dir "supervisely[training,tracking,model-benchmark] @ git+https://github.com/supervisely/supervisely.git@1dae68e253ce5c5425716e729096ebd9e7410dfc"
+RUN pip install --no-cache-dir "supervisely[training,tracking,model-benchmark] @ git+https://github.com/supervisely/supervisely.git@a7f51b523dec44206665f434bb5d359783719bfd"
 
 LABEL python_sdk_version="cross-loop-fix"
