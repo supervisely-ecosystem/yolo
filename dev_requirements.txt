@@ -1,6 +1,8 @@
 # git+https://github.com/supervisely/supervisely.git@test-sdk-branch
 
-supervisely[training,tracking,model-benchmark] @ git+https://github.com/supervisely/supervisely.git@a7f51b523dec44206665f434bb5d359783719bfd
+supervisely[training]==6.74.33
+supervisely[tracking]==6.74.33
+supervisely[model-benchmark]==6.74.33
 
 torch==2.7.1
 torchvision==0.22.1
