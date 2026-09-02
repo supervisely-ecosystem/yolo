@@ -43,9 +43,10 @@ def start_training():
     log_dir = join(getcwd(), train_config["project"], train_config["name"])
     train.start_tensorboard(log_dir)
     trainer = Trainer(train_config)
-    trainer.train()
+    save_dir = trainer.train()
 
-    output_checkpoint_dir = join(getcwd(), train_config["project"], train_config["name"], "weights")
+    # ultralytics may rename the run directory, so take the one it actually used
+    output_checkpoint_dir = join(str(save_dir), "weights")
     experiment_info = {
         "model_name": train.model_name,
         "model_files": {},
@@ -110,6 +111,8 @@ def prepare_train_config(data_config_path):
             "name": "ultralytics",
             "cache": False,
             "save": True,
+            # keep the run in <project>/<name>, the tensorboard log dir points there
+            "exist_ok": True,
         }
     )
     return train_config
