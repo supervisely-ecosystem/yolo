@@ -22,7 +22,7 @@
 
 # Overview
 
-This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection and instance segmentation. Support for pose estimation will be added in the upcoming releases, meanwhile you can use [Train YOLOv8](https://ecosystem.supervisely.com/apps/yolov8/train) app for pose estimation.
+This app allows you to train models using checkpoints from YOLO architecture on a selected dataset. You can define model checkpoints, data split methods, training hyperparameters and many other features related to model training. The app supports models pretrained on COCO or Open Images V7 dataset and models trained on custom datasets. Supported task types include object detection, instance segmentation and pose estimation.
 
 **Object Detection models**
 
@@ -82,6 +82,26 @@ This app allows you to train models using checkpoints from YOLO architecture on 
 | YOLOv8m-seg | 640       | 49.9      | 40.8       | 27.3       | 110.2     | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8m-seg.pt) |
 | YOLOv8l-seg | 640       | 52.3      | 42.6       | 46.0       | 220.5     | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8l-seg.pt) |
 | YOLOv8x-seg | 640       | 53.4      | 43.4       | 71.8       | 344.1     | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x-seg.pt) |
+
+**Pose Estimation models**
+
+| Model        | Size (px) | mAP (pose) | Params (M) | FLOPs (B) | Checkpoint                                                                                 |
+| ------------ | --------- | ---------- | ---------- | --------- | ------------------------------------------------------------------------------------------ |
+| YOLO26n-pose | 640       | 57.2       | 2.9        | 7.6       | [Download](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt) |
+| YOLO26s-pose | 640       | 63.0       | 10.4       | 24.1      | [Download](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-pose.pt) |
+| YOLO26m-pose | 640       | 68.8       | 21.5       | 73.3      | [Download](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-pose.pt) |
+| YOLO26l-pose | 640       | 70.4       | 25.9       | 91.7      | [Download](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-pose.pt) |
+| YOLO26x-pose | 640       | 71.6       | 57.6       | 202.3     | [Download](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-pose.pt) |
+| YOLO11n-pose | 640       | 50.0       | 2.9        | 7.6       | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n-pose.pt) |
+| YOLO11s-pose | 640       | 58.9       | 9.9        | 23.2      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s-pose.pt) |
+| YOLO11m-pose | 640       | 64.9       | 20.9       | 71.7      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m-pose.pt) |
+| YOLO11l-pose | 640       | 66.1       | 26.2       | 90.7      | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11l-pose.pt) |
+| YOLO11x-pose | 640       | 69.5       | 58.8       | 203.3     | [Download](https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11x-pose.pt) |
+| YOLOv8n-pose | 640       | 50.4       | 3.3        | 9.2       | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-pose.pt) |
+| YOLOv8s-pose | 640       | 60.0       | 11.6       | 30.2      | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8s-pose.pt) |
+| YOLOv8m-pose | 640       | 65.0       | 26.4       | 81.0      | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8m-pose.pt) |
+| YOLOv8l-pose | 640       | 67.6       | 44.4       | 168.6     | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8l-pose.pt) |
+| YOLOv8x-pose | 640       | 69.2       | 69.4       | 263.2     | [Download](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x-pose.pt) |
 
 # How to Run
 
