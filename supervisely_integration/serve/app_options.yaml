@@ -4,5 +4,5 @@ external_models: true
 external_model_options:
   config: false
   classes: false
-  task_types: ["object detection", "instance segmentation"]
+  task_types: ["object detection", "instance segmentation", "pose estimation"]
 supported_runtimes: ["pytorch", "onnxruntime", "tensorrt"]

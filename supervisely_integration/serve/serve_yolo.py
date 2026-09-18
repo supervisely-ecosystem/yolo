@@ -7,9 +7,17 @@ import numpy as np
 from ultralytics import YOLO
 
 import supervisely as sly
-from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
+from supervisely.convert.image.yolo.yolo_helper import (
+    SLY_YOLO_TASK_TYPE_MAP,
+    create_geometry_config,
+)
 from supervisely.nn.inference import ModelPrecision, ModelSource, RuntimeType, TaskType
-from supervisely.nn.prediction_dto import PredictionBBox, PredictionMask
+from supervisely.nn.prediction_dto import (
+    PredictionBBox,
+    PredictionKeypoints,
+    PredictionMask,
+)
+from supervisely_integration.serve.keypoints_template import human_template
 
 SERVE_PATH = "supervisely_integration/serve"
 
@@ -39,13 +47,12 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             self.model = self._load_tensorrt(checkpoint_path, device)
             self.max_batch_size = 1
 
-        if self.model.task == "detect" and self.task_type == TaskType.INSTANCE_SEGMENTATION:
+        expected_yolo_task = SLY_YOLO_TASK_TYPE_MAP.get(self.task_type)
+        if expected_yolo_task is not None and self.model.task != expected_yolo_task:
             raise ValueError(
-                f"YOLO model is not supported for instance segmentation task. Model task type is {TaskType.OBJECT_DETECTION}, but selected task type is {TaskType.INSTANCE_SEGMENTATION}"
-            )
-        elif self.model.task == "segment" and self.task_type == TaskType.OBJECT_DETECTION:
-            raise ValueError(
-                f"YOLO model is not supported for object detection task. Model task type is {TaskType.INSTANCE_SEGMENTATION}, but selected task type is {TaskType.OBJECT_DETECTION}"
+                f"Checkpoint is a '{self.model.task}' model, but the selected task type is "
+                f"'{self.task_type}' (YOLO task '{expected_yolo_task}'). "
+                f"Select a checkpoint that matches the task type."
             )
 
         self.classes = list(self.model.names.values())
@@ -125,7 +132,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         benchmark["postprocess"] += to_dto_time
         return predictions, benchmark
 
-    def _create_label(self, dto: Union[PredictionMask, PredictionBBox]):
+    def _create_label(self, dto: Union[PredictionMask, PredictionBBox, PredictionKeypoints]):
         if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
             obj_class = self.model_meta.get_obj_class(dto.class_name)
             if obj_class is None:
@@ -154,9 +161,26 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             if dto.score is not None:
                 tags.append(sly.Tag(self._get_confidence_tag_meta(), dto.score))
             label = sly.Label(geometry, obj_class, tags)
+        elif self.task_type == TaskType.POSE_ESTIMATION:
+            obj_class = self.model_meta.get_obj_class(dto.class_name)
+            if obj_class is None:
+                raise KeyError(
+                    f"Class {dto.class_name} not found in model classes {self.get_classes()}"
+                )
+            nodes = [
+                sly.Node(label=node_key, row=y, col=x)
+                for node_key, (x, y) in zip(dto.labels, dto.coordinates)
+            ]
+            geometry = sly.GraphNodes(nodes)
+            tags = []
+            if dto.score is not None:
+                tags.append(sly.Tag(self._get_confidence_tag_meta(), dto.score))
+            label = sly.Label(geometry, obj_class, tags)
         return label
 
-    def _to_dto(self, prediction, settings: dict) -> List[Union[PredictionMask, PredictionBBox]]:
+    def _to_dto(
+        self, prediction, settings: dict
+    ) -> List[Union[PredictionMask, PredictionBBox, PredictionKeypoints]]:
         """Converts YOLO Results to a List of Prediction DTOs."""
         dtos = []
         if self.task_type == TaskType.OBJECT_DETECTION:
@@ -182,6 +206,30 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                     mask = mask.cpu().numpy()
                     class_name = self.classes[cls_index]
                     dtos.append(PredictionMask(class_name, mask, confidence))
+        elif self.task_type == TaskType.POSE_ESTIMATION:
+            boxes_data = prediction.boxes.data
+            if prediction.keypoints is not None:
+                point_threshold = settings.get("point_threshold", 0.1)
+                keypoints_data = prediction.keypoints.data
+                # (x, y, visibility) per point, or (x, y) when the checkpoint
+                # carries no per-point confidence
+                with_scores = keypoints_data.shape[-1] == 3
+                for box, keypoints in zip(boxes_data, keypoints_data):
+                    confidence = float(box[4])
+                    cls_index = int(box[5])
+                    class_name = self.classes[cls_index]
+                    node_keys = self.keypoint_node_keys[class_name]
+                    labels, coordinates = [], []
+                    for node_key, point in zip(node_keys, keypoints):
+                        if with_scores and float(point[2]) < point_threshold:
+                            continue
+                        labels.append(node_key)
+                        coordinates.append(point[:2].cpu().numpy())
+                    if not labels:  # a graph needs at least one visible point
+                        continue
+                    dto = PredictionKeypoints(class_name, labels, coordinates)
+                    dto.score = confidence
+                    dtos.append(dto)
         return dtos
 
     # -------------------------- #
@@ -211,8 +259,78 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         elif self.task_type == TaskType.INSTANCE_SEGMENTATION:
             self.general_class_names = list(self.model.names.values())
             obj_classes = [sly.ObjClass(name, sly.Bitmap) for name in self.class_names]
+        elif self.task_type == TaskType.POSE_ESTIMATION:
+            obj_classes = self._pose_obj_classes()
         self._model_meta = sly.ProjectMeta(obj_classes=sly.ObjClassCollection(obj_classes))
         self._get_confidence_tag_meta()
+        if self.task_type == TaskType.POSE_ESTIMATION:
+            # node keys of each class template, in the order the model predicts them.
+            # A template built here keys its nodes by point label, one that came from a
+            # project meta keys them by node id -- either way the key is what a Node has
+            # to carry for the graph to validate against the class.
+            self.keypoint_node_keys = {
+                obj_class.name: list(obj_class.geometry_config[sly.GraphNodes.items_json_field])
+                for obj_class in obj_classes
+            }
+            self._check_keypoint_count()
+
+    def _pose_obj_classes(self) -> List[sly.ObjClass]:
+        """Build a keypoints class per model class, each with its graph template.
+
+        A custom checkpoint carries the template of the project it was trained on in
+        its model meta, which the SDK has already loaded by this point. A pretrained
+        checkpoint is always COCO-pose, so it gets the human template; anything else
+        falls back to an unnamed template of the right size.
+        """
+        trained_meta = self._model_meta
+        obj_classes = []
+        for name in self.class_names:
+            geometry_config = None
+            if trained_meta is not None:
+                trained_class = trained_meta.get_obj_class(name)
+                if trained_class is not None and trained_class.geometry_type == sly.GraphNodes:
+                    geometry_config = trained_class.geometry_config
+            if geometry_config is None:
+                if self.model_source == ModelSource.PRETRAINED:
+                    geometry_config = human_template
+                else:
+                    num_keypoints = self._num_keypoints()
+                    if num_keypoints is None:
+                        raise ValueError(
+                            f"Checkpoint has no keypoints template for class '{name}' and the "
+                            f"number of keypoints cannot be read from it. Deploy a checkpoint "
+                            f"trained in Supervisely, which carries the template in its model meta."
+                        )
+                    geometry_config = create_geometry_config(num_keypoints)
+            obj_classes.append(
+                sly.ObjClass(name, sly.GraphNodes, geometry_config=geometry_config)
+            )
+        return obj_classes
+
+    def _num_keypoints(self) -> Union[int, None]:
+        """Keypoints per object the loaded checkpoint predicts, or None if unreadable."""
+        kpt_shape = getattr(getattr(self.model, "model", None), "kpt_shape", None)
+        if kpt_shape is None:
+            kpt_shape = (self.model.overrides or {}).get("kpt_shape")
+        if kpt_shape is None:
+            return None
+        return int(kpt_shape[0])
+
+    def _check_keypoint_count(self):
+        """Warn when a class template does not describe every point the model predicts.
+
+        The prediction is zipped against the template, so a shorter template silently
+        drops trailing points instead of producing an obviously wrong graph.
+        """
+        num_keypoints = self._num_keypoints()
+        if num_keypoints is None:
+            return
+        for class_name, node_keys in self.keypoint_node_keys.items():
+            if len(node_keys) != num_keypoints:
+                sly.logger.warning(
+                    f"Class '{class_name}' has a {len(node_keys)}-point keypoints template, "
+                    f"but the checkpoint predicts {num_keypoints} points per object."
+                )
 
     def _check_onnx_device(self, device: str):
         import onnxruntime as ort
