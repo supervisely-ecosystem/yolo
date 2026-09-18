@@ -133,7 +133,22 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
         return predictions, benchmark
 
     def _create_label(self, dto: Union[PredictionMask, PredictionBBox, PredictionKeypoints]):
-        if self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
+        if self.task_type == TaskType.POSE_ESTIMATION:
+            obj_class = self.model_meta.get_obj_class(dto.class_name)
+            if obj_class is None:
+                raise KeyError(
+                    f"Class {dto.class_name} not found in model classes {self.get_classes()}"
+                )
+            nodes = [
+                sly.Node(label=node_key, row=y, col=x)
+                for node_key, (x, y) in zip(dto.labels, dto.coordinates)
+            ]
+            geometry = sly.GraphNodes(nodes)
+            tags = []
+            if dto.score is not None:
+                tags.append(sly.Tag(self._get_confidence_tag_meta(), dto.score))
+            label = sly.Label(geometry, obj_class, tags)
+        elif self.task_type == TaskType.OBJECT_DETECTION or dto.class_name.endswith("_bbox"):
             obj_class = self.model_meta.get_obj_class(dto.class_name)
             if obj_class is None:
                 raise KeyError(
@@ -157,21 +172,6 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                     sly.logger.debug(f"Mask of class {dto.class_name} is empty and will be skipped")
                     return None
                 geometry = sly.Bitmap(dto.mask, extra_validation=False)
-            tags = []
-            if dto.score is not None:
-                tags.append(sly.Tag(self._get_confidence_tag_meta(), dto.score))
-            label = sly.Label(geometry, obj_class, tags)
-        elif self.task_type == TaskType.POSE_ESTIMATION:
-            obj_class = self.model_meta.get_obj_class(dto.class_name)
-            if obj_class is None:
-                raise KeyError(
-                    f"Class {dto.class_name} not found in model classes {self.get_classes()}"
-                )
-            nodes = [
-                sly.Node(label=node_key, row=y, col=x)
-                for node_key, (x, y) in zip(dto.labels, dto.coordinates)
-            ]
-            geometry = sly.GraphNodes(nodes)
             tags = []
             if dto.score is not None:
                 tags.append(sly.Tag(self._get_confidence_tag_meta(), dto.score))
