@@ -29,6 +29,17 @@ dfl: 1.5 # (float) dfl loss gain
 pose: 12.0 # (float) pose loss gain
 kobj: 1.0 # (float) keypoint obj loss gain
 
+# Keypoints export (pose only)
+# How disabled graph nodes are exported to YOLO:
+#   include - labelled but not visible, so the point is trained
+#   ignore  - not labelled, so the point is skipped in the keypoint loss
+# Set one value for the whole training run, or a value per class name, e.g.
+#   disabled_keypoints:
+#     cat: ignore
+#     dog: include
+# Classes that are not listed use "include".
+disabled_keypoints: include # (str | dict) include or ignore, globally or per class
+
 # Augmentations
 hsv_h: 0.015 # (float) image HSV-Hue augmentation (fraction)
 hsv_s: 0.7 # (float) image HSV-Saturation augmentation (fraction)
