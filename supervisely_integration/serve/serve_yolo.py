@@ -221,6 +221,7 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                 # not-visible keypoint looks like. A node that is absent carries no
                 # point label and no skeleton edge can reach it.
                 keep_all_keypoints = settings.get("keep_all_keypoints", False)
+                image_height, image_width = prediction.orig_shape
                 keypoints_data = prediction.keypoints.data
                 # (x, y, visibility) per point, or (x, y) when the checkpoint
                 # carries no per-point confidence
@@ -239,11 +240,22 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                         # no per-point confidence to threshold on: keep every point
                         chosen = list(range(min(len(node_keys), len(keypoints))))
                         disabled = [False] * len(chosen)
+                    if count_visible(disabled) < 1:  # a graph needs a visible point
+                        continue
                     # coordinates are only moved off the GPU for points actually kept
                     labels = [node_keys[i] for i in chosen]
                     coordinates = [keypoints[i][:2].cpu().numpy() for i in chosen]
-                    if count_visible(disabled) < 1:  # a graph needs a visible point
-                        continue
+                    for position, is_disabled in enumerate(disabled):
+                        if is_disabled:
+                            # a low-confidence point often lands outside the image, and
+                            # a graph with any node out of bounds is dropped whole when
+                            # the annotation is built. A disabled node is not drawn, so
+                            # pinning it to the image is safe and keeps the figure.
+                            coordinates[position] = np.clip(
+                                coordinates[position],
+                                (0, 0),
+                                (image_width - 1, image_height - 1),
+                            )
                     dto = PredictionKeypoints(class_name, labels, coordinates)
                     dto.score = confidence
                     dto.disabled = disabled
