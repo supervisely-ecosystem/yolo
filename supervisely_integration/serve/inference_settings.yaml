@@ -4,3 +4,4 @@ half: False # (bool) use half precision (FP16)
 max_det: 300 # (int) maximum number of detections per image
 agnostic_nms: False # (bool) whether to use class-agnostic NMS or not
 point_threshold: 0.1 # (float) point confidence threshold (for pose estimation)
+keep_all_keypoints: False # (bool) for pose estimation: keep every point of the class template, marking points below "point_threshold" as disabled instead of dropping them

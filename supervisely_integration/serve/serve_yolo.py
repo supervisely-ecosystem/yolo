@@ -17,6 +17,10 @@ from supervisely.nn.prediction_dto import (
     PredictionKeypoints,
     PredictionMask,
 )
+from supervisely_integration.serve.keypoints_confidence import (
+    count_visible,
+    select_visible_indices,
+)
 from supervisely_integration.serve.keypoints_template import human_template
 
 SERVE_PATH = "supervisely_integration/serve"
@@ -139,10 +143,11 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                 raise KeyError(
                     f"Class {dto.class_name} not found in model classes {self.get_classes()}"
                 )
-            nodes = [
-                sly.Node(label=node_key, row=y, col=x)
-                for node_key, (x, y) in zip(dto.labels, dto.coordinates)
-            ]
+            disabled_flags = getattr(dto, "disabled", None) or []
+            nodes = []
+            for i, (node_key, (x, y)) in enumerate(zip(dto.labels, dto.coordinates)):
+                is_disabled = bool(disabled_flags[i]) if i < len(disabled_flags) else False
+                nodes.append(sly.Node(label=node_key, row=y, col=x, disabled=is_disabled))
             geometry = sly.GraphNodes(nodes)
             tags = []
             if dto.score is not None:
@@ -210,6 +215,13 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
             boxes_data = prediction.boxes.data
             if prediction.keypoints is not None:
                 point_threshold = settings.get("point_threshold", 0.1)
+                # when set, every point of the class template is emitted; the ones
+                # scoring below `point_threshold` are kept but marked disabled instead
+                # of being dropped from the graph, which is what a manually annotated
+                # not-visible keypoint looks like. A node that is absent carries no
+                # point label and no skeleton edge can reach it.
+                keep_all_keypoints = settings.get("keep_all_keypoints", False)
+                image_height, image_width = prediction.orig_shape
                 keypoints_data = prediction.keypoints.data
                 # (x, y, visibility) per point, or (x, y) when the checkpoint
                 # carries no per-point confidence
@@ -219,16 +231,34 @@ class YOLOModel(sly.nn.inference.ObjectDetection):
                     cls_index = int(box[5])
                     class_name = self.classes[cls_index]
                     node_keys = self.keypoint_node_keys[class_name]
-                    labels, coordinates = [], []
-                    for node_key, point in zip(node_keys, keypoints):
-                        if with_scores and float(point[2]) < point_threshold:
-                            continue
-                        labels.append(node_key)
-                        coordinates.append(point[:2].cpu().numpy())
-                    if not labels:  # a graph needs at least one visible point
+                    if with_scores:
+                        scores = [float(point[2]) for point in keypoints[: len(node_keys)]]
+                        chosen, disabled = select_visible_indices(
+                            scores, point_threshold, keep_all_keypoints
+                        )
+                    else:
+                        # no per-point confidence to threshold on: keep every point
+                        chosen = list(range(min(len(node_keys), len(keypoints))))
+                        disabled = [False] * len(chosen)
+                    if count_visible(disabled) < 1:  # a graph needs a visible point
                         continue
+                    # coordinates are only moved off the GPU for points actually kept
+                    labels = [node_keys[i] for i in chosen]
+                    coordinates = [keypoints[i][:2].cpu().numpy() for i in chosen]
+                    for position, is_disabled in enumerate(disabled):
+                        if is_disabled:
+                            # a low-confidence point often lands outside the image, and
+                            # a graph with any node out of bounds is dropped whole when
+                            # the annotation is built. A disabled node is not drawn, so
+                            # pinning it to the image is safe and keeps the figure.
+                            coordinates[position] = np.clip(
+                                coordinates[position],
+                                (0, 0),
+                                (image_width - 1, image_height - 1),
+                            )
                     dto = PredictionKeypoints(class_name, labels, coordinates)
                     dto.score = confidence
+                    dto.disabled = disabled
                     dtos.append(dto)
         return dtos
 
