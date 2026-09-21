@@ -22,6 +22,9 @@ if sly.is_development():
     load_dotenv(expanduser("~/supervisely.env"))
 
 
+# Export-time hyperparameter, read by the Supervisely -> YOLO converter instead of ultralytics.
+DISABLED_KEYPOINTS = "disabled_keypoints"
+
 base_path = "supervisely_integration/train"
 train = TrainApp(
     "YOLO",
@@ -76,7 +79,12 @@ def convert_data():
     """Convert Supervisely project data to YOLO format."""
     project = train.sly_project
     yolo_project_path = join(getcwd(), train.work_dir, "yolo_project")
-    project.to_yolo(yolo_project_path, train.task_type, val_datasets=["val"])
+    project.to_yolo(
+        yolo_project_path,
+        train.task_type,
+        val_datasets=["val"],
+        disabled_keypoints=train.hyperparameters.get(DISABLED_KEYPOINTS, "include"),
+    )
     data_config_path = join(yolo_project_path, "data_config.yaml")
 
     # Update YOLO settings
@@ -100,6 +108,8 @@ def prepare_train_config(data_config_path):
         )
 
     train_config = {**train.hyperparameters}
+    # ultralytics rejects unknown keys, and this one is consumed by the converter
+    train_config.pop(DISABLED_KEYPOINTS, None)
     train_config.update(
         {
             "task": SLY_YOLO_TASK_TYPE_MAP[train.task_type],
