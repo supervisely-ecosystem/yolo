@@ -83,7 +83,8 @@ def convert_data():
         yolo_project_path,
         train.task_type,
         val_datasets=["val"],
-        disabled_keypoints=train.hyperparameters.get(DISABLED_KEYPOINTS, "include"),
+        # "or" and not a get() default: clearing the value in the editor yields None
+        disabled_keypoints=train.hyperparameters.get(DISABLED_KEYPOINTS) or "include",
     )
     data_config_path = join(yolo_project_path, "data_config.yaml")
 
