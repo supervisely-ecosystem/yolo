@@ -8,11 +8,16 @@ from ultralytics import settings
 settings.update({"tensorboard": True})
 
 import supervisely as sly
-from supervisely.convert.image.yolo.yolo_helper import SLY_YOLO_TASK_TYPE_MAP
+from supervisely.convert.image.yolo.yolo_helper import (
+    SLY_YOLO_TASK_TYPE_MAP,
+    YOLOTaskType,
+    validate_task_type,
+)
 from supervisely.io.fs import get_file_name, get_file_name_with_ext
 from supervisely.nn import ModelSource
 from supervisely.nn.training.train_app import TrainApp
 from supervisely_integration.serve.serve_yolo import YOLOModel
+from supervisely_integration.train import pose_to_yolo
 from supervisely_integration.train.trainer import Trainer
 from dotenv import load_dotenv
 
@@ -79,13 +84,17 @@ def convert_data():
     """Convert Supervisely project data to YOLO format."""
     project = train.sly_project
     yolo_project_path = join(getcwd(), train.work_dir, "yolo_project")
-    project.to_yolo(
-        yolo_project_path,
-        train.task_type,
-        val_datasets=["val"],
-        # "or" and not a get() default: clearing the value in the editor yields None
-        disabled_keypoints=train.hyperparameters.get(DISABLED_KEYPOINTS) or "include",
-    )
+    if validate_task_type(train.task_type) == YOLOTaskType.POSE:
+        # one keypoint template for the whole project, see pose_to_yolo
+        pose_to_yolo.convert(
+            project,
+            yolo_project_path,
+            val_datasets=["val"],
+            # "or" and not a get() default: clearing the value in the editor yields None
+            disabled_keypoints=train.hyperparameters.get(DISABLED_KEYPOINTS) or "include",
+        )
+    else:
+        project.to_yolo(yolo_project_path, train.task_type, val_datasets=["val"])
     data_config_path = join(yolo_project_path, "data_config.yaml")
 
     # Update YOLO settings
