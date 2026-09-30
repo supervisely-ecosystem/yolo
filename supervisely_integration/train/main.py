@@ -41,6 +41,25 @@ train = TrainApp(
 inference_settings = "supervisely_integration/serve/inference_settings.yaml"
 train.register_inference_class(YOLOModel, inference_settings)
 
+# The server rejects entities-collections.items.bulk.add above ~65.5k ids in one call,
+# and TrainApp adds the whole train/val split at once, so split it into batches.
+COLLECTION_ITEMS_BATCH_SIZE = 10000
+
+
+def _add_collection_items_in_batches(add_items):
+    def wrapper(id, items):
+        added = []
+        for batch in sly.batched(list(items), COLLECTION_ITEMS_BATCH_SIZE):
+            added.extend(add_items(id, batch))
+        return added
+
+    return wrapper
+
+
+train._api.entities_collection.add_items = _add_collection_items_in_batches(
+    train._api.entities_collection.add_items
+)
+
 
 @train.start
 def start_training():
